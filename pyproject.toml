@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sports-analytics-pipeline"
+version = "0.4.0"
+description = "Sports data analytics and research automation pipeline (NFL, MLB and multi-sport)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+sports_analytics_pipeline = ["data/*.json", "data/*.sql"]

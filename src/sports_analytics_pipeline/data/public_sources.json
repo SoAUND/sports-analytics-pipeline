@@ -1,0 +1,1437 @@
+{
+  "version": "2026-10-01",
+  "sources": [
+    {
+      "source_key": "official-directory:nba:nba_official",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://official.nba.com/",
+      "category": "official_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "official.nba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:nba:nba_injury_report",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://official.nba.com/nba-injury-report-2025-26-season/",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "official.nba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:nba:nba_lineups",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.nba.com/players/todays-lineups",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "nba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:nba:nba_schedule_rest",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.nba.com/schedule",
+      "category": "rest_travel",
+      "official": true,
+      "parser": "html",
+      "source_family": "nba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:nba:nba_stats",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.nba.com/stats",
+      "category": "statistics_analytics",
+      "official": true,
+      "parser": "html",
+      "source_family": "nba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:nba:nba_transactions",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.nba.com/players/transactions",
+      "category": "transactions_or_changes",
+      "official": true,
+      "parser": "html",
+      "source_family": "nba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wnba:wnba_official",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.wnba.com/",
+      "category": "official_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "wnba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wnba:wnba_injury_report",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.wnba.com/wnba-injury-report",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "wnba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wnba:wnba_roster_tracker",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.wnba.com/players/roster-tracker",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "wnba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wnba:wnba_schedule_rest",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.wnba.com/schedule",
+      "category": "rest_travel",
+      "official": true,
+      "parser": "html",
+      "source_family": "wnba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wnba:basketball_reference",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.basketball-reference.com/wnba/",
+      "category": "statistics_analytics",
+      "official": false,
+      "parser": "html",
+      "source_family": "basketball-reference.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wnba:wnba_transactions",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.wnba.com/players/transactions",
+      "category": "transactions_or_changes",
+      "official": true,
+      "parser": "html",
+      "source_family": "wnba.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:epl:premier_league",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/",
+      "category": "official_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:epl:premier_league_team_news",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/en/news",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:epl:premier_league_lineups",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/en/matchweek",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:epl:premier_league_fixtures_rest",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/en/fixtures",
+      "category": "rest_travel",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:epl:premier_league_statistics",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/en/fixtures",
+      "category": "statistics_analytics",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:epl:premier_league_squad_changes",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/en/matchweek",
+      "category": "transactions_or_changes",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:ufc_news",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.ufc.com/news",
+      "category": "official_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "ufc.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:ufc_news_injuries",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.ufc.com/news",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "ufc.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:ufc_event",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.ufc.com/events",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "ufc.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:ufc_weigh_in",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.ufc.com/news",
+      "category": "weigh_in_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "ufc.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:ufc_event_rest_travel",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.ufc.com/events",
+      "category": "rest_travel",
+      "official": true,
+      "parser": "html",
+      "source_family": "ufc.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:ufcstats",
+      "sports": [
+        "mma"
+      ],
+      "url": "http://ufcstats.com/",
+      "category": "statistics_analytics",
+      "official": true,
+      "parser": "html",
+      "source_family": "ufcstats.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:mma:tapology",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.tapology.com/",
+      "category": "transactions_or_changes",
+      "official": false,
+      "parser": "html",
+      "source_family": "tapology.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:atp:atp_tour",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.atptour.com/en/scores/current",
+      "category": "official_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "atptour.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:atp:atp_tour_status",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.atptour.com/en/scores/current",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "atptour.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:atp:atp_draws",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.atptour.com/en/scores/current",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "atptour.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:atp:atp_schedule_rest",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.atptour.com/en/scores/current",
+      "category": "rest_travel",
+      "official": true,
+      "parser": "html",
+      "source_family": "atptour.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:atp:tennis_abstract",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.tennisabstract.com/",
+      "category": "statistics_analytics",
+      "official": false,
+      "parser": "html",
+      "source_family": "tennisabstract.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wta:wta",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.wtatennis.com/tournaments",
+      "category": "official_status",
+      "official": true,
+      "parser": "html",
+      "source_family": "wtatennis.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wta:wta_status",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.wtatennis.com/tournaments",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "wtatennis.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wta:wta_draws",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.wtatennis.com/tournaments",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "wtatennis.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wta:wta_schedule_rest",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.wtatennis.com/tournaments",
+      "category": "rest_travel",
+      "official": true,
+      "parser": "html",
+      "source_family": "wtatennis.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "official-directory:wta:tennis_abstract",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.tennisabstract.com/",
+      "category": "statistics_analytics",
+      "official": false,
+      "parser": "html",
+      "source_family": "tennisabstract.com",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:nfl",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:nfl",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://www.espn.com/espn/rss/nfl/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:nfl",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://www.thescore.com/nfl/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-injuries:nfl",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://www.espn.com/nfl/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cbs-injuries:nfl",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://www.cbssports.com/nfl/injuries/",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "cbs",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "covers-injuries:nfl",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://www.covers.com/sport/football/nfl/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "covers",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:mlb",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:mlb",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.espn.com/espn/rss/mlb/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:mlb",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.thescore.com/mlb/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-injuries:mlb",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.espn.com/mlb/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cbs-injuries:mlb",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.cbssports.com/mlb/injuries/",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "cbs",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "covers-injuries:mlb",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.covers.com/sport/baseball/mlb/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "covers",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:nba",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:nba",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.espn.com/espn/rss/nba/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:nba",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.thescore.com/nba/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-injuries:nba",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.espn.com/nba/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cbs-injuries:nba",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.cbssports.com/nba/injuries/",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "cbs",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "covers-injuries:nba",
+      "sports": [
+        "nba"
+      ],
+      "url": "https://www.covers.com/sport/basketball/nba/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "covers",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:wnba",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:wnba",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.espn.com/espn/rss/wnba/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:wnba",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.thescore.com/wnba/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-injuries:wnba",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.espn.com/wnba/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cbs-injuries:wnba",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.cbssports.com/wnba/injuries/",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "cbs",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "covers-injuries:wnba",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.covers.com/sport/basketball/wnba/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "covers",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:nhl",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:nhl",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.espn.com/espn/rss/nhl/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:nhl",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.thescore.com/nhl/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-injuries:nhl",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.espn.com/nhl/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cbs-injuries:nhl",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.cbssports.com/nhl/injuries/",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "cbs",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "covers-injuries:nhl",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.covers.com/sport/hockey/nhl/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "covers",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.espn.com/espn/rss/ncf/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.thescore.com/ncaaf/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-injuries:cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.espn.com/college-football/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cbs-injuries:cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.cbssports.com/college-football/injuries/",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "cbs",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "covers-injuries:cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.covers.com/sport/football/ncaaf/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "covers",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:epl",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:epl",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.espn.com/espn/rss/soccer/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:epl",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.thescore.com/epl/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:mma",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:mma",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.espn.com/espn/rss/mma/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:mma",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.thescore.com/mma/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:atp",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/tennis/atp/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:atp",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.espn.com/espn/rss/tennis/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:atp",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.thescore.com/atp/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-scoreboard:wta",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://site.api.espn.com/apis/site/v2/sports/tennis/wta/scoreboard",
+      "category": "official_status",
+      "official": false,
+      "parser": "espn_scoreboard",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "espn-news:wta",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.espn.com/espn/rss/tennis/news",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "espn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "thescore:wta",
+      "sports": [
+        "wta"
+      ],
+      "url": "https://www.thescore.com/wta/news",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "thescore",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "nfl-official",
+      "sports": [
+        "nfl"
+      ],
+      "url": "https://www.nfl.com/injuries/",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "nfl",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "mlb-lineups",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.mlb.com/starting-lineups",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "mlb",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "mlb-news",
+      "sports": [
+        "mlb"
+      ],
+      "url": "https://www.mlb.com/news",
+      "category": "news",
+      "official": true,
+      "parser": "html",
+      "source_family": "mlb",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "nhl-projections",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.nhl.com/news/nhl-lineup-projections-2026-27-season",
+      "category": "lineup_or_participants",
+      "official": true,
+      "parser": "html",
+      "source_family": "nhl",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "dfo-goalies",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.dailyfaceoff.com/starting-goalies",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "dfo",
+      "source_family": "dailyfaceoff",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "dfo-lines",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.dailyfaceoff.com/teams",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "html",
+      "source_family": "dailyfaceoff",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "puckpedia-injuries",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://puckpedia.com/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "puckpedia",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "puckpedia-transactions",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://puckpedia.com/transactions",
+      "category": "transactions_or_changes",
+      "official": false,
+      "parser": "html",
+      "source_family": "puckpedia",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "dobber",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://frozenpool.dobbersports.com/",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "dobber",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "goaliepost",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://goaliepost.com/",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "html",
+      "source_family": "dobber",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "sportsnet",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.sportsnet.ca/hockey/nhl/",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "sportsnet",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "tsn",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.tsn.ca/nhl/injuries",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "tsn",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "hockeynews",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://thehockeynews.com/",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "hockeynews",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "hockeywriters",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://thehockeywriters.com/daily-nhl-projected-lineups-injuries-scratches-starting-goalies/",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "html",
+      "source_family": "hockeywriters",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "sec",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.secsports.com/fbreports",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "sec",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "bigten",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://bigten.org/fb/availability-reports/",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "bigten",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "big12",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://big12sports.com/sports/2025/8/14/FBreporting.aspx",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "big12",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "acc",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://theacc.com/sports/2025/8/28/availability-reporting-football.aspx",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "acc",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "sunbelt",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://sunbeltsports.org/news/2025/8/11/football-availability-report-new.aspx",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "sunbelt",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "mountainwest",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://themw.com/sports/football/",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "mountainwest",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "cfp",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://collegefootballplayoff.com/sports/2025/11/12/reports",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "cfp",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "ourlads",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.ourlads.com/ncaa-football-depth-charts/",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "html",
+      "source_family": "ourlads",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "action-cfb",
+      "sports": [
+        "cfb"
+      ],
+      "url": "https://www.actionnetwork.com/ncaaf/injury-report",
+      "category": "injury_availability",
+      "official": false,
+      "parser": "html",
+      "source_family": "actionnetwork",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "epl-injuries",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.premierleague.com/en/latest-player-injuries",
+      "category": "injury_availability",
+      "official": true,
+      "parser": "html",
+      "source_family": "premierleague",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "bbc-football",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "bbc",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "guardian-football",
+      "sports": [
+        "epl"
+      ],
+      "url": "https://www.theguardian.com/football/premierleague/rss",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "guardian",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "mmafighting",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.mmafighting.com/rss/index.xml",
+      "category": "news",
+      "official": false,
+      "parser": "rss",
+      "source_family": "mmafighting",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "sherdog",
+      "sports": [
+        "mma"
+      ],
+      "url": "https://www.sherdog.com/news/news/list",
+      "category": "news",
+      "official": false,
+      "parser": "html",
+      "source_family": "sherdog",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "itf",
+      "sports": [
+        "atp",
+        "wta"
+      ],
+      "url": "https://www.itftennis.com/en/news-and-media/",
+      "category": "news",
+      "official": true,
+      "parser": "html",
+      "source_family": "itf",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "tennisexplorer",
+      "sports": [
+        "atp",
+        "wta"
+      ],
+      "url": "https://www.tennisexplorer.com/",
+      "category": "statistics_analytics",
+      "official": false,
+      "parser": "html",
+      "source_family": "tennisexplorer",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "leftwinglock",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.leftwinglock.com/starting-goalies/",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "html",
+      "source_family": "leftwinglock",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "rotowire-goalies",
+      "sports": [
+        "nhl"
+      ],
+      "url": "https://www.rotowire.com/hockey/starting-goalies.php",
+      "category": "lineup_or_participants",
+      "official": false,
+      "parser": "html",
+      "source_family": "rotowire",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "tennisnow",
+      "sports": [
+        "atp",
+        "wta"
+      ],
+      "url": "https://tennisnow.com/feed/",
+      "parser": "rss",
+      "official": false,
+      "source_family": "tennisnow",
+      "category": "news",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "tennis365",
+      "sports": [
+        "atp",
+        "wta"
+      ],
+      "url": "https://www.tennis365.com/feed",
+      "parser": "rss",
+      "official": false,
+      "source_family": "tennis365",
+      "category": "news",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "atp-news",
+      "sports": [
+        "atp"
+      ],
+      "url": "https://www.atptour.com/en/news",
+      "parser": "html",
+      "official": true,
+      "source_family": "atp-news",
+      "category": "news",
+      "cache_minutes": 30
+    },
+    {
+      "source_key": "wnba-game-notes",
+      "sports": [
+        "wnba"
+      ],
+      "url": "https://www.wnba.com/game-notes",
+      "parser": "html",
+      "official": true,
+      "source_family": "wnba-game-notes",
+      "category": "news",
+      "cache_minutes": 30
+    }
+  ]
+}

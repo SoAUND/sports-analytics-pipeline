@@ -1,0 +1,1408 @@
+[
+  {
+    "venue_id": "state_farm_arena",
+    "official_name": "State Farm Arena",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Atlanta",
+    "state_or_region": "GA",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary_and_special",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/hawks/schedule",
+    "provider_ids": [
+      "espn:1827"
+    ]
+  },
+  {
+    "venue_id": "td_garden",
+    "official_name": "TD Garden",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Boston",
+    "state_or_region": "MA",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary_and_special",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/celtics/schedule",
+    "provider_ids": [
+      "espn:1824"
+    ]
+  },
+  {
+    "venue_id": "barclays_center",
+    "official_name": "Barclays Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Brooklyn",
+    "state_or_region": "NY",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/nets/schedule",
+    "provider_ids": [
+      "espn:3559"
+    ]
+  },
+  {
+    "venue_id": "spectrum_center",
+    "official_name": "Spectrum Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "Charlotte",
+    "state_or_region": "NC",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/hornets/schedule",
+    "provider_ids": [
+      "espn:1893"
+    ]
+  },
+  {
+    "venue_id": "united_center",
+    "official_name": "United Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Chicago",
+    "state_or_region": "IL",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary_and_special",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/bulls/schedule",
+    "provider_ids": [
+      "espn:1847"
+    ]
+  },
+  {
+    "venue_id": "rocket_arena",
+    "official_name": "Rocket Arena",
+    "sports": [
+      "nba"
+    ],
+    "city": "Cleveland",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "Rocket Mortgage FieldHouse",
+      "Quicken Loans Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/cavaliers/arena",
+    "provider_ids": [
+      "espn:3417"
+    ]
+  },
+  {
+    "venue_id": "american_airlines_center",
+    "official_name": "American Airlines Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Dallas",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary_and_special",
+    "aliases": [
+      "American Airlines Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/mavericks/schedule",
+    "provider_ids": [
+      "espn:516"
+    ]
+  },
+  {
+    "venue_id": "ball_arena",
+    "official_name": "Ball Arena",
+    "sports": [
+      "nba"
+    ],
+    "city": "Denver",
+    "state_or_region": "CO",
+    "country_code": "US",
+    "time_zone": "America/Denver",
+    "venue_type": "primary",
+    "aliases": [
+      "Pepsi Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/nuggets/schedule",
+    "provider_ids": [
+      "espn:892"
+    ]
+  },
+  {
+    "venue_id": "little_caesars_arena",
+    "official_name": "Little Caesars Arena",
+    "sports": [
+      "nba"
+    ],
+    "city": "Detroit",
+    "state_or_region": "MI",
+    "country_code": "US",
+    "time_zone": "America/Detroit",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/pistons/schedule",
+    "provider_ids": [
+      "espn:5404"
+    ]
+  },
+  {
+    "venue_id": "chase_center",
+    "official_name": "Chase Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "San Francisco",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/warriors/schedule",
+    "provider_ids": [
+      "espn:6270"
+    ]
+  },
+  {
+    "venue_id": "toyota_center",
+    "official_name": "Toyota Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "Houston",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [
+      "Toyota Center (Houston)"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/rockets/schedule",
+    "provider_ids": [
+      "espn:1394"
+    ]
+  },
+  {
+    "venue_id": "gainbridge_fieldhouse",
+    "official_name": "Gainbridge Fieldhouse",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Indianapolis",
+    "state_or_region": "IN",
+    "country_code": "US",
+    "time_zone": "America/Indiana/Indianapolis",
+    "venue_type": "primary",
+    "aliases": [
+      "Bankers Life Fieldhouse",
+      "Conseco Fieldhouse"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/pacers/schedule",
+    "provider_ids": [
+      "espn:2183"
+    ]
+  },
+  {
+    "venue_id": "intuit_dome",
+    "official_name": "Intuit Dome",
+    "sports": [
+      "nba"
+    ],
+    "city": "Inglewood",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/clippers/schedule",
+    "provider_ids": [
+      "espn:10642"
+    ]
+  },
+  {
+    "venue_id": "crypto_com_arena",
+    "official_name": "Crypto.com Arena",
+    "sports": [
+      "mma",
+      "nba",
+      "wnba"
+    ],
+    "city": "Los Angeles",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [
+      "Staples Center",
+      "Crypto.com Arena at L.A. LIVE"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/lakers/schedule",
+    "provider_ids": [
+      "espn:1841"
+    ]
+  },
+  {
+    "venue_id": "fedexforum",
+    "official_name": "FedExForum",
+    "sports": [
+      "nba"
+    ],
+    "city": "Memphis",
+    "state_or_region": "TN",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [
+      "FedEx Forum"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/grizzlies/schedule",
+    "provider_ids": [
+      "espn:1392"
+    ]
+  },
+  {
+    "venue_id": "kaseya_center",
+    "official_name": "Kaseya Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "Miami",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "FTX Arena",
+      "AmericanAirlines Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/heat/schedule",
+    "provider_ids": [
+      "espn:3438"
+    ]
+  },
+  {
+    "venue_id": "fiserv_forum",
+    "official_name": "Fiserv Forum",
+    "sports": [
+      "nba"
+    ],
+    "city": "Milwaukee",
+    "state_or_region": "WI",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/bucks/schedule",
+    "provider_ids": [
+      "espn:5777"
+    ]
+  },
+  {
+    "venue_id": "target_center",
+    "official_name": "Target Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Minneapolis",
+    "state_or_region": "MN",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/timberwolves/schedule",
+    "provider_ids": [
+      "espn:2029"
+    ]
+  },
+  {
+    "venue_id": "smoothie_king_center",
+    "official_name": "Smoothie King Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "New Orleans",
+    "state_or_region": "LA",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [
+      "New Orleans Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/pelicans/schedule",
+    "provider_ids": [
+      "espn:985"
+    ]
+  },
+  {
+    "venue_id": "madison_square_garden",
+    "official_name": "Madison Square Garden",
+    "sports": [
+      "nba"
+    ],
+    "city": "New York",
+    "state_or_region": "NY",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "MSG"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/knicks/schedule",
+    "provider_ids": [
+      "espn:1830"
+    ]
+  },
+  {
+    "venue_id": "paycom_center",
+    "official_name": "Paycom Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "Oklahoma City",
+    "state_or_region": "OK",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [
+      "Chesapeake Energy Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/thunder/schedule",
+    "provider_ids": [
+      "espn:2559"
+    ]
+  },
+  {
+    "venue_id": "kia_center",
+    "official_name": "Kia Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "Orlando",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "Amway Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/magic/schedule",
+    "provider_ids": [
+      "espn:3432"
+    ]
+  },
+  {
+    "venue_id": "xfinity_mobile_arena",
+    "official_name": "Xfinity Mobile Arena",
+    "sports": [
+      "mma",
+      "nba"
+    ],
+    "city": "Philadelphia",
+    "state_or_region": "PA",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "Wells Fargo Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/sixers/tickets/society76",
+    "provider_ids": [
+      "espn:1845"
+    ]
+  },
+  {
+    "venue_id": "mortgage_matchup_center",
+    "official_name": "Mortgage Matchup Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Phoenix",
+    "state_or_region": "AZ",
+    "country_code": "US",
+    "time_zone": "America/Phoenix",
+    "venue_type": "primary",
+    "aliases": [
+      "Footprint Center",
+      "Talking Stick Resort Arena",
+      "Phoenix Suns Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/suns/schedule",
+    "provider_ids": [
+      "espn:1949"
+    ]
+  },
+  {
+    "venue_id": "moda_center",
+    "official_name": "Moda Center",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Portland",
+    "state_or_region": "OR",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [
+      "Rose Garden"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/blazers/schedule",
+    "provider_ids": [
+      "espn:3423"
+    ]
+  },
+  {
+    "venue_id": "golden_1_center",
+    "official_name": "Golden 1 Center",
+    "sports": [
+      "mma",
+      "nba"
+    ],
+    "city": "Sacramento",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/kings/schedule",
+    "provider_ids": [
+      "espn:5310"
+    ]
+  },
+  {
+    "venue_id": "frost_bank_center",
+    "official_name": "Frost Bank Center",
+    "sports": [
+      "nba"
+    ],
+    "city": "San Antonio",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [
+      "AT&T Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/spurs/schedule",
+    "provider_ids": [
+      "espn:780"
+    ]
+  },
+  {
+    "venue_id": "scotiabank_arena",
+    "official_name": "Scotiabank Arena",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Toronto",
+    "state_or_region": "ON",
+    "country_code": "CA",
+    "time_zone": "America/Toronto",
+    "venue_type": "primary_and_special",
+    "aliases": [
+      "Air Canada Centre"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/raptors/schedule",
+    "provider_ids": [
+      "espn:1838"
+    ]
+  },
+  {
+    "venue_id": "delta_center",
+    "official_name": "Delta Center",
+    "sports": [
+      "mma",
+      "nba"
+    ],
+    "city": "Salt Lake City",
+    "state_or_region": "UT",
+    "country_code": "US",
+    "time_zone": "America/Denver",
+    "venue_type": "primary",
+    "aliases": [
+      "Vivint Arena",
+      "Vivint Smart Home Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/jazz/schedule",
+    "provider_ids": [
+      "espn:3093"
+    ]
+  },
+  {
+    "venue_id": "capital_one_arena",
+    "official_name": "Capital One Arena",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Washington",
+    "state_or_region": "DC",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary_and_special",
+    "aliases": [
+      "Verizon Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.nba.com/wizards/schedule",
+    "provider_ids": [
+      "espn:1823"
+    ]
+  },
+  {
+    "venue_id": "gateway_center_arena",
+    "official_name": "Gateway Center Arena @ College Park",
+    "sports": [
+      "wnba"
+    ],
+    "city": "College Park",
+    "state_or_region": "GA",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "Gateway Center",
+      "Gateway Center Arena",
+      "Gateway Center Arena at College Park"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://dream.wnba.com/",
+    "provider_ids": [
+      "espn:6282"
+    ]
+  },
+  {
+    "venue_id": "wintrust_arena",
+    "official_name": "Wintrust Arena",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Chicago",
+    "state_or_region": "IL",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://sky.wnba.com/",
+    "provider_ids": [
+      "espn:5427"
+    ]
+  },
+  {
+    "venue_id": "mohegan_sun_arena",
+    "official_name": "Mohegan Sun Arena",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Uncasville",
+    "state_or_region": "CT",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://sun.wnba.com/",
+    "provider_ids": [
+      "espn:2160"
+    ]
+  },
+  {
+    "venue_id": "peoplesbank_arena",
+    "official_name": "PeoplesBank Arena",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Hartford",
+    "state_or_region": "CT",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "special",
+    "aliases": [
+      "XL Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wnba.com/news/2026-schedule-release"
+  },
+  {
+    "venue_id": "college_park_center",
+    "official_name": "College Park Center",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Arlington",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "time_zone": "America/Chicago",
+    "venue_type": "primary_2026",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://wings.wnba.com/",
+    "provider_ids": [
+      "espn:3416"
+    ]
+  },
+  {
+    "venue_id": "michelob_ultra_arena",
+    "official_name": "Michelob ULTRA Arena",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Las Vegas",
+    "state_or_region": "NV",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [
+      "Mandalay Bay Events Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://aces.wnba.com/",
+    "provider_ids": [
+      "espn:4005"
+    ]
+  },
+  {
+    "venue_id": "t_mobile_arena",
+    "official_name": "T-Mobile Arena",
+    "sports": [
+      "mma",
+      "nba",
+      "wnba"
+    ],
+    "city": "Las Vegas",
+    "state_or_region": "NV",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "special_and_event",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wnba.com/news/2026-schedule-release",
+    "provider_ids": [
+      "espn:5060"
+    ]
+  },
+  {
+    "venue_id": "climate_pledge_arena",
+    "official_name": "Climate Pledge Arena",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Seattle",
+    "state_or_region": "WA",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "primary",
+    "aliases": [
+      "KeyArena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://storm.wnba.com/",
+    "provider_ids": [
+      "espn:7224"
+    ]
+  },
+  {
+    "venue_id": "coca_cola_coliseum",
+    "official_name": "Coca-Cola Coliseum",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Toronto",
+    "state_or_region": "ON",
+    "country_code": "CA",
+    "time_zone": "America/Toronto",
+    "venue_type": "primary",
+    "aliases": [
+      "Ricoh Coliseum"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://tempo.wnba.com/",
+    "provider_ids": [
+      "espn:7546"
+    ]
+  },
+  {
+    "venue_id": "bell_centre",
+    "official_name": "Bell Centre",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Montreal",
+    "state_or_region": "QC",
+    "country_code": "CA",
+    "time_zone": "America/Toronto",
+    "venue_type": "special",
+    "aliases": [
+      "Centre Bell"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wnba.com/news/2026-schedule-release"
+  },
+  {
+    "venue_id": "rogers_arena",
+    "official_name": "Rogers Arena",
+    "sports": [
+      "nba",
+      "wnba"
+    ],
+    "city": "Vancouver",
+    "state_or_region": "BC",
+    "country_code": "CA",
+    "time_zone": "America/Vancouver",
+    "venue_type": "special",
+    "aliases": [
+      "General Motors Place"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wnba.com/news/2026-schedule-release",
+    "provider_ids": [
+      "espn:1833"
+    ]
+  },
+  {
+    "venue_id": "carefirst_arena",
+    "official_name": "CareFirst Arena",
+    "sports": [
+      "wnba"
+    ],
+    "city": "Washington",
+    "state_or_region": "DC",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "primary",
+    "aliases": [
+      "Entertainment and Sports Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://mystics.wnba.com/",
+    "provider_ids": [
+      "espn:5946"
+    ]
+  },
+  {
+    "venue_id": "vitality_stadium",
+    "official_name": "Vitality Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "Bournemouth",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Dean Court"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:6020"
+    ]
+  },
+  {
+    "venue_id": "emirates_stadium",
+    "official_name": "Emirates Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Arsenal Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:2267"
+    ]
+  },
+  {
+    "venue_id": "villa_park",
+    "official_name": "Villa Park",
+    "sports": [
+      "epl"
+    ],
+    "city": "Birmingham",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:307"
+    ]
+  },
+  {
+    "venue_id": "gtech_community_stadium",
+    "official_name": "Gtech Community Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "Brentford",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Brentford Community Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:9658"
+    ]
+  },
+  {
+    "venue_id": "american_express_stadium",
+    "official_name": "American Express Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "Brighton",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Amex Stadium",
+      "Falmer Stadium",
+      "American Express Community Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:10378"
+    ]
+  },
+  {
+    "venue_id": "stamford_bridge",
+    "official_name": "Stamford Bridge",
+    "sports": [
+      "epl"
+    ],
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:249"
+    ]
+  },
+  {
+    "venue_id": "coventry_building_society_arena",
+    "official_name": "Coventry Building Society Arena",
+    "sports": [
+      "epl"
+    ],
+    "city": "Coventry",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Ricoh Arena",
+      "CBS Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:1680"
+    ]
+  },
+  {
+    "venue_id": "selhurst_park",
+    "official_name": "Selhurst Park",
+    "sports": [
+      "epl"
+    ],
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:135"
+    ]
+  },
+  {
+    "venue_id": "hill_dickinson_stadium",
+    "official_name": "Hill Dickinson Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "Liverpool",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Everton Stadium",
+      "Bramley-Moore Dock Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:10318"
+    ]
+  },
+  {
+    "venue_id": "craven_cottage",
+    "official_name": "Craven Cottage",
+    "sports": [
+      "epl"
+    ],
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:279"
+    ]
+  },
+  {
+    "venue_id": "mkm_stadium",
+    "official_name": "MKM Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "Hull",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "The MKM Stadium",
+      "KCOM Stadium",
+      "KC Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:3670"
+    ]
+  },
+  {
+    "venue_id": "portman_road",
+    "official_name": "Portman Road",
+    "sports": [
+      "epl"
+    ],
+    "city": "Ipswich",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:257"
+    ]
+  },
+  {
+    "venue_id": "elland_road",
+    "official_name": "Elland Road",
+    "sports": [
+      "epl"
+    ],
+    "city": "Leeds",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:190"
+    ]
+  },
+  {
+    "venue_id": "anfield",
+    "official_name": "Anfield",
+    "sports": [
+      "epl"
+    ],
+    "city": "Liverpool",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:192"
+    ]
+  },
+  {
+    "venue_id": "etihad_stadium",
+    "official_name": "Etihad Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "Manchester",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "City of Manchester Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:4036"
+    ]
+  },
+  {
+    "venue_id": "old_trafford",
+    "official_name": "Old Trafford",
+    "sports": [
+      "epl"
+    ],
+    "city": "Manchester",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:250"
+    ]
+  },
+  {
+    "venue_id": "st_james_park",
+    "official_name": "St James' Park",
+    "sports": [
+      "epl"
+    ],
+    "city": "Newcastle upon Tyne",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "St. James' Park",
+      "St James Park"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:152"
+    ]
+  },
+  {
+    "venue_id": "city_ground",
+    "official_name": "The City Ground",
+    "sports": [
+      "epl"
+    ],
+    "city": "Nottingham",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "City Ground"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:131"
+    ]
+  },
+  {
+    "venue_id": "stadium_of_light",
+    "official_name": "Stadium of Light",
+    "sports": [
+      "epl"
+    ],
+    "city": "Sunderland",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:194"
+    ]
+  },
+  {
+    "venue_id": "tottenham_hotspur_stadium",
+    "official_name": "Tottenham Hotspur Stadium",
+    "sports": [
+      "epl"
+    ],
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "primary",
+    "aliases": [
+      "Tottenham Stadium"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.premierleague.com/",
+    "provider_ids": [
+      "espn:7827"
+    ]
+  },
+  {
+    "venue_id": "arena_cdmx",
+    "official_name": "Arena CDMX",
+    "sports": [
+      "mma",
+      "nba"
+    ],
+    "city": "Mexico City",
+    "state_or_region": "CDMX",
+    "country_code": "MX",
+    "time_zone": "America/Mexico_City",
+    "venue_type": "event",
+    "aliases": [
+      "Mexico City Arena",
+      "Arena Ciudad de México"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.ufc.com/events",
+    "provider_ids": [
+      "espn:5779"
+    ]
+  },
+  {
+    "venue_id": "belgrade_arena",
+    "official_name": "Belgrade Arena",
+    "sports": [
+      "mma"
+    ],
+    "city": "Belgrade",
+    "state_or_region": "Belgrade",
+    "country_code": "RS",
+    "time_zone": "Europe/Belgrade",
+    "venue_type": "event",
+    "aliases": [
+      "Štark Arena"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.ufc.com/events"
+  },
+  {
+    "venue_id": "national_gymnastics_arena",
+    "official_name": "National Gymnastics Arena",
+    "sports": [
+      "mma"
+    ],
+    "city": "Baku",
+    "state_or_region": "Baku",
+    "country_code": "AZ",
+    "time_zone": "Asia/Baku",
+    "venue_type": "event",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.ufc.com/events"
+  },
+  {
+    "venue_id": "rogers_place",
+    "official_name": "Rogers Place",
+    "sports": [
+      "mma"
+    ],
+    "city": "Edmonton",
+    "state_or_region": "AB",
+    "country_code": "CA",
+    "time_zone": "America/Edmonton",
+    "venue_type": "event",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.ufc.com/events",
+    "provider_ids": [
+      "espn:5282"
+    ]
+  },
+  {
+    "venue_id": "lindner_family_tennis_center",
+    "official_name": "Lindner Family Tennis Center",
+    "sports": [
+      "atp",
+      "wta"
+    ],
+    "city": "Mason",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "tournament",
+    "aliases": [
+      "Lindner Family Tennis Centre"
+    ],
+    "provider_sport_keys": [
+      "tennis_atp_cincinnati_open",
+      "tennis_wta_cincinnati_open"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wtatennis.com/tournaments/cincinnati-open"
+  },
+  {
+    "venue_id": "club_sonoma",
+    "official_name": "Club Sonoma",
+    "sports": [
+      "wta"
+    ],
+    "city": "Monterrey",
+    "state_or_region": "Nuevo Leon",
+    "country_code": "MX",
+    "time_zone": "America/Monterrey",
+    "venue_type": "tournament",
+    "aliases": [
+      "Club Sonoma Monterrey"
+    ],
+    "provider_sport_keys": [
+      "tennis_wta_monterrey_open"
+    ],
+    "verified_on": "2026-08-24",
+    "source_url": "https://www.wtatennis.com/tournaments/1039/monterrey/2026"
+  },
+  {
+    "venue_id": "indian_wells_tennis_garden",
+    "official_name": "Indian Wells Tennis Garden",
+    "sports": [
+      "atp",
+      "wta"
+    ],
+    "city": "Indian Wells",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "time_zone": "America/Los_Angeles",
+    "venue_type": "tournament",
+    "aliases": [
+      "Indian Wells"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wtatennis.com/tournaments"
+  },
+  {
+    "venue_id": "fitzgerald_tennis_center",
+    "official_name": "William H.G. FitzGerald Tennis Center",
+    "sports": [
+      "atp",
+      "wta"
+    ],
+    "city": "Washington",
+    "state_or_region": "DC",
+    "country_code": "US",
+    "time_zone": "America/New_York",
+    "venue_type": "tournament",
+    "aliases": [
+      "Rock Creek Park Tennis Center"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wtatennis.com/tournaments/1045/washington-dc/2026"
+  },
+  {
+    "venue_id": "queens_club",
+    "official_name": "The Queen's Club",
+    "sports": [
+      "atp",
+      "wta"
+    ],
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "time_zone": "Europe/London",
+    "venue_type": "tournament",
+    "aliases": [
+      "Queen's Club"
+    ],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.wtatennis.com/tournaments/1111/queens/2026"
+  },
+  {
+    "venue_id": "foro_italico",
+    "official_name": "Foro Italico",
+    "sports": [
+      "atp",
+      "wta"
+    ],
+    "city": "Rome",
+    "state_or_region": "Lazio",
+    "country_code": "IT",
+    "time_zone": "Europe/Rome",
+    "venue_type": "tournament",
+    "aliases": [],
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.atptour.com/en/news/rome-2026-site-upgrades-feature"
+  }
+]

@@ -1,0 +1,81 @@
+name: Automatic Venue Sync
+
+on:
+  schedule:
+    - cron: "17 13 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: automatic-venue-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install Our bot
+        run: pip install .
+
+      - name: Check every supported sport
+        run: |
+          python scripts/run_venue_sync.py \
+            --sports all \
+            --apply \
+            --report var/venue-sync-report.json
+
+      - name: Add report to workflow summary
+        if: always()
+        run: |
+          if [ -f var/venue-sync-report.json ]; then
+            echo "## Our Automatic Venue Sync" >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          report = json.loads(Path("var/venue-sync-report.json").read_text())
+          print(json.dumps({
+              "sports": report.get("sports"),
+              "counts": report.get("counts"),
+              "source_status": report.get("source_status"),
+              "betting_api_requests_used": report.get("betting_api_requests_used"),
+          }, indent=2, sort_keys=True))
+          PY
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload complete review report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: venue-sync-report
+          path: var/venue-sync-report.json
+          if-no-files-found: warn
+
+      - name: Open a review pull request for safe updates
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/venue-name-sync
+          delete-branch: true
+          commit-message: "Update verified venue identities"
+          title: "Update verified venue identities"
+          body: |
+            Our weekly venue sync detected safe catalog changes.
+
+            Automatic changes are limited to:
+            - linking a stable provider ID to an exact reviewed venue name; or
+            - updating a display name already proven by that stable provider ID.
+
+            Former names remain aliases. New and unrecognized venues stay in the workflow report for review and are never guessed.
+          draft: true

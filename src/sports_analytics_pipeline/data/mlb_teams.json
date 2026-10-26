@@ -1,0 +1,553 @@
+[
+  {
+    "team_id": "mlb_ari",
+    "official_name": "Arizona Diamondbacks",
+    "city_name": "Phoenix",
+    "nickname": "Diamondbacks",
+    "abbreviation": "ARI",
+    "conference": "NL",
+    "division": "West",
+    "primary_stadium_id": "chase_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Arizona Diamondbacks",
+      "Diamondbacks",
+      "D-backs",
+      "ARI"
+    ]
+  },
+  {
+    "team_id": "mlb_atl",
+    "official_name": "Atlanta Braves",
+    "city_name": "Atlanta",
+    "nickname": "Braves",
+    "abbreviation": "ATL",
+    "conference": "NL",
+    "division": "East",
+    "primary_stadium_id": "truist_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Atlanta Braves",
+      "Braves",
+      "ATL"
+    ]
+  },
+  {
+    "team_id": "mlb_bal",
+    "official_name": "Baltimore Orioles",
+    "city_name": "Baltimore",
+    "nickname": "Orioles",
+    "abbreviation": "BAL",
+    "conference": "AL",
+    "division": "East",
+    "primary_stadium_id": "camden_yards",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Baltimore Orioles",
+      "Orioles",
+      "BAL"
+    ]
+  },
+  {
+    "team_id": "mlb_bos",
+    "official_name": "Boston Red Sox",
+    "city_name": "Boston",
+    "nickname": "Red Sox",
+    "abbreviation": "BOS",
+    "conference": "AL",
+    "division": "East",
+    "primary_stadium_id": "fenway_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Boston Red Sox",
+      "Red Sox",
+      "BOS"
+    ]
+  },
+  {
+    "team_id": "mlb_cws",
+    "official_name": "Chicago White Sox",
+    "city_name": "Chicago",
+    "nickname": "White Sox",
+    "abbreviation": "CWS",
+    "conference": "AL",
+    "division": "Central",
+    "primary_stadium_id": "rate_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Chicago White Sox",
+      "White Sox",
+      "CWS",
+      "CHW"
+    ]
+  },
+  {
+    "team_id": "mlb_chc",
+    "official_name": "Chicago Cubs",
+    "city_name": "Chicago",
+    "nickname": "Cubs",
+    "abbreviation": "CHC",
+    "conference": "NL",
+    "division": "Central",
+    "primary_stadium_id": "wrigley_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Chicago Cubs",
+      "Cubs",
+      "CHC"
+    ]
+  },
+  {
+    "team_id": "mlb_cin",
+    "official_name": "Cincinnati Reds",
+    "city_name": "Cincinnati",
+    "nickname": "Reds",
+    "abbreviation": "CIN",
+    "conference": "NL",
+    "division": "Central",
+    "primary_stadium_id": "great_american_ball_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Cincinnati Reds",
+      "Reds",
+      "CIN"
+    ]
+  },
+  {
+    "team_id": "mlb_cle",
+    "official_name": "Cleveland Guardians",
+    "city_name": "Cleveland",
+    "nickname": "Guardians",
+    "abbreviation": "CLE",
+    "conference": "AL",
+    "division": "Central",
+    "primary_stadium_id": "progressive_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Cleveland Guardians",
+      "Guardians",
+      "CLE"
+    ]
+  },
+  {
+    "team_id": "mlb_col",
+    "official_name": "Colorado Rockies",
+    "city_name": "Denver",
+    "nickname": "Rockies",
+    "abbreviation": "COL",
+    "conference": "NL",
+    "division": "West",
+    "primary_stadium_id": "coors_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Colorado Rockies",
+      "Rockies",
+      "COL"
+    ]
+  },
+  {
+    "team_id": "mlb_det",
+    "official_name": "Detroit Tigers",
+    "city_name": "Detroit",
+    "nickname": "Tigers",
+    "abbreviation": "DET",
+    "conference": "AL",
+    "division": "Central",
+    "primary_stadium_id": "comerica_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Detroit Tigers",
+      "Tigers",
+      "DET"
+    ]
+  },
+  {
+    "team_id": "mlb_hou",
+    "official_name": "Houston Astros",
+    "city_name": "Houston",
+    "nickname": "Astros",
+    "abbreviation": "HOU",
+    "conference": "AL",
+    "division": "West",
+    "primary_stadium_id": "daikin_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Houston Astros",
+      "Astros",
+      "HOU"
+    ]
+  },
+  {
+    "team_id": "mlb_kc",
+    "official_name": "Kansas City Royals",
+    "city_name": "Kansas City",
+    "nickname": "Royals",
+    "abbreviation": "KC",
+    "conference": "AL",
+    "division": "Central",
+    "primary_stadium_id": "kauffman_stadium",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Kansas City Royals",
+      "Royals",
+      "KC",
+      "KCR"
+    ]
+  },
+  {
+    "team_id": "mlb_laa",
+    "official_name": "Los Angeles Angels",
+    "city_name": "Anaheim",
+    "nickname": "Angels",
+    "abbreviation": "LAA",
+    "conference": "AL",
+    "division": "West",
+    "primary_stadium_id": "angel_stadium",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Los Angeles Angels",
+      "Angels",
+      "LAA"
+    ]
+  },
+  {
+    "team_id": "mlb_lad",
+    "official_name": "Los Angeles Dodgers",
+    "city_name": "Los Angeles",
+    "nickname": "Dodgers",
+    "abbreviation": "LAD",
+    "conference": "NL",
+    "division": "West",
+    "primary_stadium_id": "dodger_stadium",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Los Angeles Dodgers",
+      "Dodgers",
+      "LAD"
+    ]
+  },
+  {
+    "team_id": "mlb_mia",
+    "official_name": "Miami Marlins",
+    "city_name": "Miami",
+    "nickname": "Marlins",
+    "abbreviation": "MIA",
+    "conference": "NL",
+    "division": "East",
+    "primary_stadium_id": "loandepot_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Miami Marlins",
+      "Marlins",
+      "MIA"
+    ]
+  },
+  {
+    "team_id": "mlb_mil",
+    "official_name": "Milwaukee Brewers",
+    "city_name": "Milwaukee",
+    "nickname": "Brewers",
+    "abbreviation": "MIL",
+    "conference": "NL",
+    "division": "Central",
+    "primary_stadium_id": "american_family_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Milwaukee Brewers",
+      "Brewers",
+      "MIL"
+    ]
+  },
+  {
+    "team_id": "mlb_min",
+    "official_name": "Minnesota Twins",
+    "city_name": "Minneapolis",
+    "nickname": "Twins",
+    "abbreviation": "MIN",
+    "conference": "AL",
+    "division": "Central",
+    "primary_stadium_id": "target_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Minnesota Twins",
+      "Twins",
+      "MIN"
+    ]
+  },
+  {
+    "team_id": "mlb_nym",
+    "official_name": "New York Mets",
+    "city_name": "New York",
+    "nickname": "Mets",
+    "abbreviation": "NYM",
+    "conference": "NL",
+    "division": "East",
+    "primary_stadium_id": "citi_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "New York Mets",
+      "Mets",
+      "NYM"
+    ]
+  },
+  {
+    "team_id": "mlb_nyy",
+    "official_name": "New York Yankees",
+    "city_name": "New York",
+    "nickname": "Yankees",
+    "abbreviation": "NYY",
+    "conference": "AL",
+    "division": "East",
+    "primary_stadium_id": "yankee_stadium",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "New York Yankees",
+      "Yankees",
+      "NYY"
+    ]
+  },
+  {
+    "team_id": "mlb_ath",
+    "official_name": "Athletics",
+    "city_name": "West Sacramento",
+    "nickname": "Athletics",
+    "abbreviation": "ATH",
+    "conference": "AL",
+    "division": "West",
+    "primary_stadium_id": "sutter_health_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Athletics",
+      "A’s",
+      "A's",
+      "ATH",
+      "OAK"
+    ]
+  },
+  {
+    "team_id": "mlb_phi",
+    "official_name": "Philadelphia Phillies",
+    "city_name": "Philadelphia",
+    "nickname": "Phillies",
+    "abbreviation": "PHI",
+    "conference": "NL",
+    "division": "East",
+    "primary_stadium_id": "citizens_bank_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Philadelphia Phillies",
+      "Phillies",
+      "PHI"
+    ]
+  },
+  {
+    "team_id": "mlb_pit",
+    "official_name": "Pittsburgh Pirates",
+    "city_name": "Pittsburgh",
+    "nickname": "Pirates",
+    "abbreviation": "PIT",
+    "conference": "NL",
+    "division": "Central",
+    "primary_stadium_id": "pnc_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Pittsburgh Pirates",
+      "Pirates",
+      "PIT"
+    ]
+  },
+  {
+    "team_id": "mlb_sd",
+    "official_name": "San Diego Padres",
+    "city_name": "San Diego",
+    "nickname": "Padres",
+    "abbreviation": "SD",
+    "conference": "NL",
+    "division": "West",
+    "primary_stadium_id": "petco_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "San Diego Padres",
+      "Padres",
+      "SD",
+      "SDP"
+    ]
+  },
+  {
+    "team_id": "mlb_sf",
+    "official_name": "San Francisco Giants",
+    "city_name": "San Francisco",
+    "nickname": "Giants",
+    "abbreviation": "SF",
+    "conference": "NL",
+    "division": "West",
+    "primary_stadium_id": "oracle_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "San Francisco Giants",
+      "SF Giants",
+      "Giants",
+      "SF",
+      "SFG"
+    ]
+  },
+  {
+    "team_id": "mlb_sea",
+    "official_name": "Seattle Mariners",
+    "city_name": "Seattle",
+    "nickname": "Mariners",
+    "abbreviation": "SEA",
+    "conference": "AL",
+    "division": "West",
+    "primary_stadium_id": "t_mobile_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Seattle Mariners",
+      "Mariners",
+      "SEA"
+    ]
+  },
+  {
+    "team_id": "mlb_stl",
+    "official_name": "St. Louis Cardinals",
+    "city_name": "St. Louis",
+    "nickname": "Cardinals",
+    "abbreviation": "STL",
+    "conference": "NL",
+    "division": "Central",
+    "primary_stadium_id": "busch_stadium",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "St. Louis Cardinals",
+      "St Louis Cardinals",
+      "Cardinals",
+      "STL"
+    ]
+  },
+  {
+    "team_id": "mlb_tb",
+    "official_name": "Tampa Bay Rays",
+    "city_name": "St. Petersburg",
+    "nickname": "Rays",
+    "abbreviation": "TB",
+    "conference": "AL",
+    "division": "East",
+    "primary_stadium_id": "tropicana_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Tampa Bay Rays",
+      "Rays",
+      "TB",
+      "TBR"
+    ]
+  },
+  {
+    "team_id": "mlb_tex",
+    "official_name": "Texas Rangers",
+    "city_name": "Arlington",
+    "nickname": "Rangers",
+    "abbreviation": "TEX",
+    "conference": "AL",
+    "division": "West",
+    "primary_stadium_id": "globe_life_field",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Texas Rangers",
+      "Rangers",
+      "TEX"
+    ]
+  },
+  {
+    "team_id": "mlb_tor",
+    "official_name": "Toronto Blue Jays",
+    "city_name": "Toronto",
+    "nickname": "Blue Jays",
+    "abbreviation": "TOR",
+    "conference": "AL",
+    "division": "East",
+    "primary_stadium_id": "rogers_centre",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Toronto Blue Jays",
+      "Blue Jays",
+      "TOR"
+    ]
+  },
+  {
+    "team_id": "mlb_wsh",
+    "official_name": "Washington Nationals",
+    "city_name": "Washington",
+    "nickname": "Nationals",
+    "abbreviation": "WSH",
+    "conference": "NL",
+    "division": "East",
+    "primary_stadium_id": "nationals_park",
+    "active_from_season": 2026,
+    "active_through_season": null,
+    "verified_on": "2026-08-15",
+    "aliases": [
+      "Washington Nationals",
+      "Nationals",
+      "WSH",
+      "WAS"
+    ]
+  }
+]

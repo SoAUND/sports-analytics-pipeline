@@ -1,0 +1,379 @@
+name: MLB Paper Database
+
+on:
+  schedule:
+    - cron: "7-57/10 10-23 * 3-10 *"
+      timezone: "America/New_York"
+    - cron: "7-57/10 0-2 * 3-10 *"
+      timezone: "America/New_York"
+  workflow_dispatch:
+    inputs:
+      run_mode:
+        description: "Choose preflight, one-time model bootstrap, or a paper run"
+        required: true
+        default: preflight
+        type: choice
+        options:
+          - preflight
+          - bootstrap_model
+          - paper_run
+      operation_date:
+        description: "YYYY-MM-DD; blank uses the America/New_York calendar date"
+        required: false
+        type: string
+      hours:
+        description: "Pregame window in hours"
+        required: true
+        default: "24"
+        type: string
+      attempts:
+        description: "Bounded paper-operation attempts (1-5)"
+        required: true
+        default: "3"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: mlb-paper-database
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+      automated: ${{ steps.gate.outputs.automated }}
+      run_mode: ${{ steps.gate.outputs.run_mode }}
+      operation_date: ${{ steps.gate.outputs.operation_date }}
+      hours: ${{ steps.gate.outputs.hours }}
+      attempts: ${{ steps.gate.outputs.attempts }}
+      checked_at: ${{ steps.status_meta.outputs.checked_at }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Resolve automatic or manual run
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REQUESTED_MODE: ${{ inputs.run_mode }}
+          REQUESTED_DATE: ${{ inputs.operation_date }}
+          REQUESTED_HOURS: ${{ inputs.hours }}
+          REQUESTED_ATTEMPTS: ${{ inputs.attempts }}
+          GITHUB_API_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python scripts/run_mlb_auto_gate.py
+
+      - name: Record status-feed gate time
+        id: status_meta
+        run: |
+          echo "checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+
+      - name: Publish due gate to permanent MLB status feed
+        if: steps.gate.outputs.should_run == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OPERATION_DATE: ${{ steps.gate.outputs.operation_date }}
+          AUTOMATED_RUN: ${{ steps.gate.outputs.automated }}
+          RUN_MODE: ${{ steps.gate.outputs.run_mode }}
+          CHECKED_AT: ${{ steps.status_meta.outputs.checked_at }}
+        run: |
+          python scripts/run_mlb_status_feed.py gate \
+            --workflow-run-id "$GITHUB_RUN_ID" \
+            --workflow-run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --operation-date "$OPERATION_DATE" \
+            --automated "$AUTOMATED_RUN" \
+            --run-mode "$RUN_MODE" \
+            --checked-at "$CHECKED_AT" \
+            --output /tmp/mlb-gate-status.md
+
+          for attempt in 1 2 3; do
+            if gh issue comment 21 --repo "$GITHUB_REPOSITORY" --body-file /tmp/mlb-gate-status.md; then
+              exit 0
+            fi
+            echo "Status-feed gate publish attempt $attempt failed."
+            sleep 5
+          done
+          exit 1
+
+  database:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    env:
+      BOT_MODE: ${{ vars.BOT_MODE }}
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      DATABASE_PATH: ${{ vars.DATABASE_PATH }}
+      ODDS_STALE_AFTER_MINUTES: ${{ vars.ODDS_STALE_AFTER_MINUTES }}
+      ODDS_API_MIN_REMAINING_CREDITS: ${{ vars.ODDS_API_MIN_REMAINING_CREDITS || '50' }}
+      # MLB receives at most two paid snapshots per UTC day; multi-sport receives ten.
+      # Together they remain below the free plan's sustainable monthly pace.
+      ODDS_API_DAILY_CREDIT_CAP: ${{ vars.MLB_ODDS_API_DAILY_CREDIT_CAP || '2' }}
+      HTTP_RETRY_ATTEMPTS: ${{ vars.HTTP_RETRY_ATTEMPTS }}
+      ACCESSIBLE_BOOKMAKERS: ${{ vars.ACCESSIBLE_BOOKMAKERS }}
+      MARKET_CONSENSUS_BOOKMAKERS: ${{ vars.MARKET_CONSENSUS_BOOKMAKERS }}
+      THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      THERUNDOWN_API_KEY: ${{ secrets.THERUNDOWN_API_KEY }}
+      NWS_USER_AGENT: ${{ secrets.NWS_USER_AGENT }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Verify protected live configuration
+        run: |
+          python - <<'PY'
+          from sports_analytics_pipeline.config import Settings
+          settings = Settings.load(".env")
+          if settings.bot_mode not in {"research", "test_only"}:
+              raise SystemExit("BOT_MODE must remain research or test_only")
+          settings.require_odds_api_key()
+          settings.require_nws_user_agent()
+          if not settings.sportsbook_lists_approved():
+              raise SystemExit("Sportsbook lists are missing")
+          print("BOT_MODE: research")
+          print("THE_ODDS_API_KEY: configured")
+          print("NWS_USER_AGENT: configured")
+          print("Sportsbook lists: configured")
+          PY
+
+      - name: Prepare database folders
+        run: |
+          mkdir -p var restore backup
+
+      - name: Find latest canonical MLB database artifact
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_ID="$(gh api \
+            "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=mlb-paper-database&per_page=100" \
+            --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')"
+
+          if [ -z "$RUN_ID" ]; then
+            echo "No canonical MLB paper database backup exists."
+            echo "Refusing to create a new database because that could reset the paper sample."
+            exit 1
+          fi
+
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Restoring canonical database from workflow run $RUN_ID"
+
+      - name: Restore latest successful database
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ steps.previous.outputs.run_id }}" \
+            --name mlb-paper-database \
+            --dir restore
+
+          test -f restore/sports_analytics.sqlite3
+
+          python scripts/run_mlb_persistence.py verify \
+            --database restore/sports_analytics.sqlite3 \
+            --manifest restore/mlb-paper-manifest.json \
+            --allow-legacy-without-manifest
+
+          cp restore/sports_analytics.sqlite3 var/sports_analytics.sqlite3
+          echo "Previous MLB paper database restored and verified."
+
+      - name: Save pre-run recovery copy
+        run: |
+          cp var/sports_analytics.sqlite3 backup/sports_analytics.sqlite3
+          python scripts/run_mlb_persistence.py manifest \
+            --database backup/sports_analytics.sqlite3 \
+            --output backup/mlb-paper-manifest.json \
+            --run-id "${{ github.run_id }}-before"
+
+      - name: Upload pre-run recovery copy
+        uses: actions/upload-artifact@v7
+        with:
+          name: mlb-paper-before-${{ github.run_id }}
+          path: |
+            backup/sports_analytics.sqlite3
+            backup/mlb-paper-manifest.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Bootstrap locked MLB history and model
+        if: needs.gate.outputs.run_mode == 'bootstrap_model'
+        run: |
+          ./bot mlb-history --seasons 2020,2021,2022,2023,2024,2025
+          ./bot mlb-model train
+          ./bot mlb-preflight --require-model
+
+      - name: Preflight existing model
+        if: needs.gate.outputs.run_mode == 'preflight' || needs.gate.outputs.run_mode == 'paper_run'
+        run: |
+          ./bot mlb-preflight --require-model
+
+      - name: Collect broad public MLB research
+        run: python scripts/collect_public_research.py --sports mlb --database var/sports_analytics.sqlite3
+
+      - name: Run MLB paper operations
+        if: needs.gate.outputs.run_mode == 'paper_run'
+        env:
+          AUTOMATED_RUN: ${{ needs.gate.outputs.automated }}
+          OPERATION_DATE: ${{ needs.gate.outputs.operation_date }}
+          OPERATION_HOURS: ${{ needs.gate.outputs.hours }}
+          OPERATION_ATTEMPTS: ${{ needs.gate.outputs.attempts }}
+        run: |
+          if [ "$AUTOMATED_RUN" = "true" ]; then
+            attempt=1
+            while true; do
+              echo "Automatic MLB paper attempt ${attempt}/${OPERATION_ATTEMPTS}"
+              if ./bot mlb-ops "$OPERATION_DATE" --hours "$OPERATION_HOURS"; then
+                break
+              fi
+              if [ "$attempt" -ge "$OPERATION_ATTEMPTS" ]; then
+                echo "Automatic MLB paper operations exhausted all attempts."
+                exit 1
+              fi
+              attempt=$((attempt + 1))
+              sleep 10
+            done
+          else
+            ./bot mlb-reliable \
+              "$OPERATION_DATE" \
+              --hours "$OPERATION_HOURS" \
+              --attempts "$OPERATION_ATTEMPTS"
+          fi
+
+      - name: Show paper operations health
+        if: needs.gate.outputs.run_mode == 'paper_run' && success()
+        env:
+          AUTOMATED_RUN: ${{ needs.gate.outputs.automated }}
+        run: |
+          if [ "$AUTOMATED_RUN" = "true" ]; then
+            ./bot mlb-ops-status
+          else
+            ./bot mlb-reliability-status
+          fi
+
+      - name: Verify final database and create manifest
+        if: success()
+        run: |
+          ./bot mlb-preflight --require-model
+          python scripts/run_mlb_persistence.py manifest \
+            --database var/sports_analytics.sqlite3 \
+            --output var/mlb-paper-manifest.json \
+            --run-id "${{ github.run_id }}"
+
+      - name: Save canonical MLB paper database
+        id: canonical
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mlb-paper-database
+          path: |
+            var/sports_analytics.sqlite3
+            var/mlb-paper-manifest.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Write automatic-run success marker
+        if: needs.gate.outputs.automated == 'true' && needs.gate.outputs.run_mode == 'paper_run' && success()
+        env:
+          OPERATION_DATE: ${{ needs.gate.outputs.operation_date }}
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timezone
+          import json
+          import os
+          from pathlib import Path
+
+          payload = {
+              "mode": "test_only",
+              "sport": "mlb",
+              "operation_date": os.environ["OPERATION_DATE"],
+              "workflow_run_id": os.environ["GITHUB_RUN_ID"],
+              "recorded_at": datetime.now(timezone.utc).isoformat(),
+              "automatic_wagering": False,
+          }
+          Path("var/mlb-auto-success.json").write_text(
+              json.dumps(payload, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print("Automatic MLB paper success marker created.")
+          PY
+
+      - name: Save automatic-run success marker
+        if: needs.gate.outputs.automated == 'true' && needs.gate.outputs.run_mode == 'paper_run' && success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mlb-auto-success
+          path: var/mlb-auto-success.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish completed MLB paper result to permanent status feed
+        if: always() && needs.gate.outputs.run_mode == 'paper_run'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OPERATION_DATE: ${{ needs.gate.outputs.operation_date }}
+          AUTOMATED_RUN: ${{ needs.gate.outputs.automated }}
+          CHECKED_AT: ${{ needs.gate.outputs.checked_at }}
+          JOB_STATUS: ${{ job.status }}
+          CANONICAL_OUTCOME: ${{ steps.canonical.outcome }}
+        run: |
+          mkdir -p var
+          python scripts/run_mlb_status_feed.py result \
+            --database "$DATABASE_PATH" \
+            --workflow-run-id "$GITHUB_RUN_ID" \
+            --workflow-run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --operation-date "$OPERATION_DATE" \
+            --automated "$AUTOMATED_RUN" \
+            --checked-at "$CHECKED_AT" \
+            --job-status "$JOB_STATUS" \
+            --canonical-outcome "$CANONICAL_OUTCOME" \
+            --output var/mlb-status-feed-comment.md
+
+          for attempt in 1 2 3; do
+            if gh issue comment 21 --repo "$GITHUB_REPOSITORY" --body-file var/mlb-status-feed-comment.md; then
+              exit 0
+            fi
+            echo "Status-feed result publish attempt $attempt failed."
+            sleep 5
+          done
+          exit 1
+
+      - name: Preserve failed state for diagnosis
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mlb-paper-failed-${{ github.run_id }}
+          path: |
+            var/sports_analytics.sqlite3
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Save public MLB research audit
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: public-mlb-research
+          path: var/public-research
+          retention-days: 7

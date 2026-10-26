@@ -1,0 +1,40 @@
+name: Public Sports Source Check
+on:
+  pull_request:
+    paths:
+      - src/sports_analytics_pipeline/public_research.py
+      - src/sports_analytics_pipeline/data/public_sources.json
+      - scripts/collect_public_research.py
+      - .github/workflows/public-source-check.yml
+  push:
+    branches: [main]
+    paths:
+      - src/sports_analytics_pipeline/public_research.py
+      - src/sports_analytics_pipeline/data/public_sources.json
+      - scripts/collect_public_research.py
+      - .github/workflows/public-source-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        sports: [nfl, mlb, nba, wnba, nhl, cfb, epl, mma, atp, wta]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install .
+      - name: Check public sources without secrets, odds requests or Telegram delivery
+        run: python scripts/collect_public_research.py --sports '${{ matrix.sports }}' --max-requests 96
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: public-source-check-${{ matrix.sports }}
+          path: var/public-research
+          retention-days: 7

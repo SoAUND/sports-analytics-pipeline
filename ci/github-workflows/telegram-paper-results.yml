@@ -1,0 +1,290 @@
+name: Telegram Paper Results
+
+on:
+  workflow_run:
+    workflows:
+      - MLB Paper Database
+      - Multi-Sport Paper Database
+    types:
+      - completed
+
+permissions:
+  actions: read
+  contents: write
+  issues: read
+
+concurrency:
+  group: multisport-paper-database
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    # Test-only Telegram reports are muted. Upstream tests and data collection
+    # continue; revised-research owns the active pick and research messages.
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    env:
+      BOT_MODE: research
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      ACCESSIBLE_BOOKMAKERS: hardrockbet
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+      SOURCE_WORKFLOW: ${{ github.event.workflow_run.name }}
+      SOURCE_EVENT: ${{ github.event.workflow_run.event }}
+      SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+      SOURCE_RUN_URL: ${{ github.event.workflow_run.html_url }}
+
+    steps:
+      - name: Inspect source workflow work
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$SOURCE_WORKFLOW" = "MLB Paper Database" ]; then
+            TARGET_JOB="database"
+          else
+            TARGET_JOB="paper"
+          fi
+
+          JOB_CONCLUSION="$(gh api \
+            "/repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_RUN_ID}/jobs?per_page=100" \
+            --jq ".jobs[] | select(.name == \"${TARGET_JOB}\") | .conclusion" \
+            | tail -n 1)"
+
+          case "$JOB_CONCLUSION" in
+            success|failure|cancelled|timed_out|action_required|neutral|startup_failure|stale)
+              SHOULD_NOTIFY=true
+              ;;
+            *)
+              SHOULD_NOTIFY=false
+              ;;
+          esac
+
+          echo "target_job=$TARGET_JOB" >> "$GITHUB_OUTPUT"
+          echo "target_conclusion=${JOB_CONCLUSION:-missing}" >> "$GITHUB_OUTPUT"
+          echo "should_notify=$SHOULD_NOTIFY" >> "$GITHUB_OUTPUT"
+          echo "Source $TARGET_JOB conclusion: ${JOB_CONCLUSION:-missing}; notify: $SHOULD_NOTIFY"
+
+      - name: Check out repository
+        if: steps.source.outputs.should_notify == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Set up Python 3.11
+        if: steps.source.outputs.should_notify == 'true'
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install project
+        if: steps.source.outputs.should_notify == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Prepare result folders
+        if: steps.source.outputs.should_notify == 'true'
+        run: mkdir -p var restore var/telegram-sports var/telegram-settled
+
+      - name: Read matching MLB status-feed result
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'MLB Paper Database'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "/repos/${GITHUB_REPOSITORY}/issues/21/comments?per_page=100" > /tmp/mlb-comments.json
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          run_id = str(os.environ["SOURCE_RUN_ID"])
+          comments = json.loads(Path("/tmp/mlb-comments.json").read_text(encoding="utf-8"))
+          matches = [
+              item.get("body", "")
+              for item in comments
+              if "our-mlb-status-feed:v1" in item.get("body", "")
+              and f'"workflow_run_id": "{run_id}"' in item.get("body", "")
+              and "paper_run_gate_due" not in item.get("body", "")
+          ]
+          if matches:
+              body = matches[-1]
+          else:
+              body = "\n".join(
+                  [
+                      "### MLB Paper Run",
+                      "```json",
+                      json.dumps(
+                          {
+                              "sport": "mlb",
+                              "workflow_run_id": run_id,
+                              "workflow_status": os.environ.get("SOURCE_CONCLUSION", "unknown"),
+                              "status": "status_feed_result_not_found",
+                              "mode": "test_only",
+                          },
+                          indent=2,
+                      ),
+                      "```",
+                  ]
+              )
+          Path("var/mlb-status-feed-comment.md").write_text(body + "\n", encoding="utf-8")
+          PY
+
+      - name: Send MLB paper result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'MLB Paper Database'
+        run: |
+          python scripts/send_telegram_notification.py \
+            --mode mlb \
+            --file var/mlb-status-feed-comment.md \
+            --run-url "$SOURCE_RUN_URL"
+
+      - name: Restore completed multi-sport paper database
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && env.SOURCE_CONCLUSION == 'success'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download multisport-paper-state \
+            --pattern our_multisport_bot.sqlite3.gz --dir restore
+          gzip -dc restore/our_multisport_bot.sqlite3.gz > restore/our_multisport_bot.sqlite3
+
+      - name: Build multi-sport status result
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database'
+        env:
+          DATABASE_PATH: restore/our_multisport_bot.sqlite3
+        run: |
+          if [ -f "$DATABASE_PATH" ]; then
+            python scripts/run_multisport_operations.py status > var/multisport-status.txt 2>&1 || true
+          else
+            {
+              echo "Workflow status: ${SOURCE_CONCLUSION}"
+              echo "No completed database artifact was available for detailed validation status."
+              echo "Mode: test_only"
+            } > var/multisport-status.txt
+          fi
+
+      - name: Build clean Telegram results
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && env.SOURCE_CONCLUSION == 'success'
+        run: |
+          SPORTS="nba,wnba,epl,mma,atp,wta"
+          python scripts/build_multisport_telegram_messages.py \
+            --status-file var/multisport-status.txt \
+            --sports "$SPORTS" \
+            --out-dir var/telegram-sports \
+            --summary-file var/multisport-summary.txt \
+            --workflow-status "$SOURCE_CONCLUSION" \
+            --database restore/our_multisport_bot.sqlite3 \
+            --horizon-minutes 90 \
+            --settled-out-dir var/telegram-settled
+
+      - name: Enforce Win-Rate Telegram price policy
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && env.SOURCE_CONCLUSION == 'success'
+        run: |
+          python scripts/enforce_win_rate_telegram_policy.py \
+            var/telegram-sports/*.txt \
+            var/multisport-summary.txt \
+            --accessible-bookmakers "$ACCESSIBLE_BOOKMAKERS"
+
+      - name: Build Win-Rate-First test report
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && env.SOURCE_CONCLUSION == 'success'
+        run: |
+          python scripts/build_win_rate_first_message.py \
+            --status-file var/multisport-status.txt \
+            --out-file var/win-rate-first.txt
+
+      - name: Send newly settled results to Telegram exactly once
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && env.SOURCE_CONCLUSION == 'success'
+        run: |
+          shopt -s nullglob
+          for RESULT_FILE in var/telegram-settled/*.txt; do
+            SLUG="$(basename "$RESULT_FILE" .txt)"
+            DECISION_ID="$(cat "var/telegram-settled/$SLUG.id")"
+            python scripts/send_telegram_notification.py \
+              --mode file \
+              --title "🏁 Automatic Test Result" \
+              --file "$RESULT_FILE" \
+              --run-url "$SOURCE_RUN_URL"
+            python scripts/mark_multisport_result_notified.py \
+              --database restore/our_multisport_bot.sqlite3 \
+              --paper-decision-id "$DECISION_ID" \
+              --source-workflow-run-id "$SOURCE_RUN_ID"
+          done
+
+      - name: Checkpoint Telegram delivery state
+        if: always() && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('restore/our_multisport_bot.sqlite3') != ''
+        run: |
+          python - <<'PY'
+          import sqlite3
+          connection = sqlite3.connect("restore/our_multisport_bot.sqlite3")
+          connection.execute("PRAGMA wal_checkpoint(FULL)")
+          connection.close()
+          PY
+
+      - name: Save rolling database with delivery state
+        if: always() && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('restore/our_multisport_bot.sqlite3') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gzip -9 -c restore/our_multisport_bot.sqlite3 > restore/our_multisport_bot.sqlite3.gz
+          gh release upload multisport-paper-state restore/our_multisport_bot.sqlite3.gz --clobber
+
+      - name: Save canonical database with delivery state
+        if: always() && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('restore/our_multisport_bot.sqlite3') != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: multisport-paper-database
+          path: restore/our_multisport_bot.sqlite3
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Send NBA paper result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/telegram-sports/nba.txt') != ''
+        run: python scripts/send_telegram_notification.py --mode file --title "🏀 NBA Test Result" --file var/telegram-sports/nba.txt --run-url "$SOURCE_RUN_URL"
+
+      - name: Send WNBA paper result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/telegram-sports/wnba.txt') != ''
+        run: python scripts/send_telegram_notification.py --mode file --title "🏀 WNBA Test Result" --file var/telegram-sports/wnba.txt --run-url "$SOURCE_RUN_URL"
+
+      - name: Send EPL soccer result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/telegram-sports/epl.txt') != ''
+        run: python scripts/send_telegram_notification.py --mode file --title "⚽ EPL / Soccer Test Result" --file var/telegram-sports/epl.txt --run-url "$SOURCE_RUN_URL"
+
+      - name: Send MMA UFC result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/telegram-sports/mma.txt') != ''
+        run: python scripts/send_telegram_notification.py --mode file --title "🥊 MMA / UFC Test Result" --file var/telegram-sports/mma.txt --run-url "$SOURCE_RUN_URL"
+
+      - name: Send ATP tennis result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/telegram-sports/atp.txt') != ''
+        run: python scripts/send_telegram_notification.py --mode file --title "🎾 ATP Tennis Test Result" --file var/telegram-sports/atp.txt --run-url "$SOURCE_RUN_URL"
+
+      - name: Send WTA tennis result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/telegram-sports/wta.txt') != ''
+        run: python scripts/send_telegram_notification.py --mode file --title "🎾 WTA Tennis Test Result" --file var/telegram-sports/wta.txt --run-url "$SOURCE_RUN_URL"
+
+      - name: Send clean multi-sport paper result to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/multisport-summary.txt') != ''
+        run: |
+          python scripts/send_telegram_notification.py \
+            --mode file \
+            --title "🏟️ Multi-Sport Test Result — ${SOURCE_CONCLUSION}" \
+            --file var/multisport-summary.txt \
+            --run-url "$SOURCE_RUN_URL"
+
+      - name: Send Win-Rate-First test report to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/win-rate-first.txt') != ''
+        run: |
+          python scripts/send_telegram_notification.py \
+            --mode file \
+            --title "🎯 Win-Rate-First Test Lane" \
+            --file var/win-rate-first.txt \
+            --run-url "$SOURCE_RUN_URL"
+
+      - name: Send multi-sport failure fallback to Telegram
+        if: steps.source.outputs.should_notify == 'true' && env.SOURCE_WORKFLOW == 'Multi-Sport Paper Database' && hashFiles('var/multisport-summary.txt') == ''
+        run: |
+          python scripts/send_telegram_notification.py \
+            --mode file \
+            --title "🏟️ Multi-Sport Test Result — ${SOURCE_CONCLUSION}" \
+            --file var/multisport-status.txt \
+            --run-url "$SOURCE_RUN_URL"

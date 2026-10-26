@@ -1,0 +1,272 @@
+name: Multi-Sport Paper Database
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/test_observations/**"
+      - "scripts/capture_test_observations.py"
+      - "scripts/build_multisport_telegram_messages.py"
+      - "scripts/build_win_rate_first_message.py"
+      - "scripts/mark_multisport_result_notified.py"
+      - "src/sports_analytics_pipeline/collectors/multisport_structured_results.py"
+      - "src/sports_analytics_pipeline/multisport_results.py"
+      - "src/sports_analytics_pipeline/multisport_runtime.py"
+      - "src/sports_analytics_pipeline/win_rate_strategy.py"
+      - "src/sports_analytics_pipeline/win_rate_reporting.py"
+      - ".github/workflows/telegram-paper-results.yml"
+      - "src/sports_analytics_pipeline/multisport_evaluation.py"
+      - "src/sports_analytics_pipeline/multisport_operations.py"
+      - ".github/workflows/multisport-paper.yml"
+  schedule:
+    # Free discovery still checks every five minutes so delayed GitHub cron cannot miss
+    # the pregame window. Paid odds and score requests have separate refresh intervals
+    # plus a sustainable daily/monthly budget.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      sports:
+        description: "Comma-separated sports: nba,wnba,epl,mma,atp,wta"
+        required: true
+        default: "nba,wnba,epl,mma,atp,wta"
+        type: string
+      run_cycle:
+        description: "Collect current data and run safe paper cycle"
+        required: true
+        default: true
+        type: boolean
+      check_provider_connections:
+        description: "Use one read-only request to verify each configured API service"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: multisport-paper-database
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+      sports: ${{ steps.gate.outputs.sports }}
+    steps:
+      - name: Resolve scheduler gate
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_SPORTS: ${{ inputs.sports }}
+          INPUT_RUN: ${{ inputs.run_cycle }}
+        run: |
+          if [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]; then
+            # Every supported sport is approved for automatic scheduled test-only evaluation.
+            # Five-minute coverage protects pregame windows while existing horizon and quota
+            # gates prevent unnecessary provider calls. Sports without a trained model remain
+            # test-only/non-countable until their own readiness requirements are satisfied.
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            SPORTS="nba,wnba,epl,mma,atp,wta"
+          else
+            if [ "$INPUT_RUN" = "true" ]; then
+              echo "should_run=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "should_run=false" >> "$GITHUB_OUTPUT"
+            fi
+            SPORTS="${INPUT_SPORTS:-nba,wnba,epl,mma,atp,wta}"
+          fi
+          echo "sports=$SPORTS" >> "$GITHUB_OUTPUT"
+
+  paper:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    env:
+      BOT_MODE: research
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      DATABASE_PATH: var/our_multisport_bot.sqlite3
+      STATE_RELEASE: multisport-paper-state
+      ODDS_STALE_AFTER_MINUTES: ${{ vars.ODDS_STALE_AFTER_MINUTES || '60' }}
+      HTTP_TIMEOUT_SECONDS: ${{ vars.HTTP_TIMEOUT_SECONDS || '20' }}
+      HTTP_RETRY_ATTEMPTS: ${{ vars.HTTP_RETRY_ATTEMPTS || '3' }}
+      ODDS_API_MIN_REMAINING_CREDITS: ${{ vars.ODDS_API_MIN_REMAINING_CREDITS || '50' }}
+      ODDS_API_DAILY_CREDIT_CAP: ${{ vars.ODDS_API_DAILY_CREDIT_CAP || '10' }}
+      MULTISPORT_ODDS_HORIZON_MINUTES: ${{ vars.MULTISPORT_ODDS_HORIZON_MINUTES || '90' }}
+      MULTISPORT_ODDS_REFRESH_MINUTES: ${{ vars.MULTISPORT_ODDS_REFRESH_MINUTES || '30' }}
+      MULTISPORT_SCORE_POLL_MINUTES: ${{ vars.MULTISPORT_SCORE_POLL_MINUTES || '720' }}
+      MULTISPORT_MMA_RESULT_POLL_MINUTES: ${{ vars.MULTISPORT_MMA_RESULT_POLL_MINUTES || '360' }}
+      MULTISPORT_PARTICIPANT_REFRESH_HOURS: ${{ vars.MULTISPORT_PARTICIPANT_REFRESH_HOURS || '24' }}
+      MULTISPORT_RESEARCH_FEEDS_JSON: ${{ vars.MULTISPORT_RESEARCH_FEEDS_JSON || '{}' }}
+      MULTISPORT_RESEARCH_MAX_REQUESTS: ${{ vars.MULTISPORT_RESEARCH_MAX_REQUESTS || '30' }}
+      MULTISPORT_RESEARCH_HORIZON_MINUTES: ${{ vars.MULTISPORT_RESEARCH_HORIZON_MINUTES || '360' }}
+      MULTISPORT_RESEARCH_FEED_TOKEN: ${{ secrets.MULTISPORT_RESEARCH_FEED_TOKEN }}
+      ACCESSIBLE_BOOKMAKERS: ${{ vars.ACCESSIBLE_BOOKMAKERS }}
+      MARKET_CONSENSUS_BOOKMAKERS: ${{ vars.MARKET_CONSENSUS_BOOKMAKERS }}
+      THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.ODDSPAPI_API_KEY }}
+      ODDS_API_IO_KEY: ${{ secrets.ODDS_API_IO_KEY }}
+      SPORTSGAMEODDS_API_KEY: ${{ secrets.SPORTSGAMEODDS_API_KEY }}
+      API_SPORTS_KEY: ${{ secrets.API_SPORTS_KEY }}
+      CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
+      FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Verify protected configuration
+        run: |
+          python scripts/run_multisport_operations.py provider-health --require-all
+          python - <<'PY'
+          from sports_analytics_pipeline.config import Settings
+          settings = Settings.load('.env')
+          if settings.bot_mode not in {'research', 'test_only'}:
+              raise SystemExit('BOT_MODE must remain research or test_only')
+          settings.require_odds_api_key()
+          if not settings.sportsbook_lists_approved():
+              raise SystemExit('Accessible and market-consensus sportsbook lists are required')
+          print('Protected multi-sport configuration verified.')
+          print(f'Odds API reserve: {settings.odds_api_min_remaining_credits} credits')
+          print(f'Odds API daily cap: {settings.odds_api_daily_credit_cap} credits')
+          print(f'Pregame odds horizon: {settings.multisport_odds_horizon_minutes} minutes')
+          print(f'Paid odds refresh: {settings.multisport_odds_refresh_minutes} minutes')
+          print(f'Final score retry: {settings.multisport_score_poll_minutes} minutes')
+          PY
+
+      - name: Check provider connections on manual request
+        if: github.event_name == 'workflow_dispatch' && inputs.check_provider_connections == true
+        run: python scripts/run_multisport_operations.py provider-health --live --require-all
+
+      - name: Prepare database folders
+        run: mkdir -p var restore state
+
+      - name: Find rolling multi-sport database
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$STATE_RELEASE" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "legacy_run_id=" >> "$GITHUB_OUTPUT"
+          else
+            LEGACY_RUN_ID="$(gh api \
+              "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=multisport-paper-database&per_page=100" \
+              --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')"
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "legacy_run_id=$LEGACY_RUN_ID" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Restore rolling multi-sport database
+        if: steps.previous.outputs.exists == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$STATE_RELEASE" \
+            --pattern our_multisport_bot.sqlite3.gz \
+            --dir restore \
+            --clobber
+          test -f restore/our_multisport_bot.sqlite3.gz
+          gzip -dc restore/our_multisport_bot.sqlite3.gz > var/our_multisport_bot.sqlite3
+
+      - name: Restore final legacy artifact once
+        if: steps.previous.outputs.exists != 'true' && steps.previous.outputs.legacy_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ steps.previous.outputs.legacy_run_id }}" \
+            --name multisport-paper-database \
+            --dir restore
+          test -f restore/our_multisport_bot.sqlite3
+          cp restore/our_multisport_bot.sqlite3 var/our_multisport_bot.sqlite3
+
+      - name: Initialize first multi-sport database
+        if: steps.previous.outputs.exists != 'true' && steps.previous.outputs.legacy_run_id == ''
+        run: python scripts/run_multisport_operations.py bootstrap
+
+      - name: Capture approved unqualified test opportunities
+        run: |
+          python scripts/capture_test_observations.py \
+            --ledger data/test_observations/run-33571051700.json \
+            --database var/our_multisport_bot.sqlite3
+
+      - name: Show training and decision preflight
+        run: python scripts/run_multisport_operations.py preflight
+
+      - name: Train any newly ready model
+        env:
+          SPORTS: ${{ needs.gate.outputs.sports }}
+        run: |
+          python scripts/run_multisport_operations.py train-all --sports "$SPORTS"
+
+      - name: Collect broad public multi-sport research
+        env:
+          SPORTS: ${{ needs.gate.outputs.sports }}
+        run: python scripts/collect_public_research.py --sports "$SPORTS" --database var/our_multisport_bot.sqlite3
+
+      - name: Run quota-gated paper cycle
+        env:
+          SPORTS: ${{ needs.gate.outputs.sports }}
+        run: |
+          python scripts/run_multisport_operations.py cycle --sports "$SPORTS"
+
+      - name: Show validation status
+        if: always()
+        run: python scripts/run_multisport_operations.py status
+
+      - name: Checkpoint SQLite before save
+        if: success()
+        run: |
+          python - <<'PY'
+          import sqlite3
+          db = sqlite3.connect('var/our_multisport_bot.sqlite3')
+          db.execute('PRAGMA wal_checkpoint(FULL)')
+          db.close()
+          PY
+
+      # Telegram shares this rolling state and concurrency group for delivery records.
+      - name: Save rolling multi-sport database
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gzip -9 -c var/our_multisport_bot.sqlite3 > state/our_multisport_bot.sqlite3.gz
+          if gh release view "$STATE_RELEASE" >/dev/null 2>&1; then
+            gh release upload "$STATE_RELEASE" state/our_multisport_bot.sqlite3.gz --clobber
+          else
+            gh release create "$STATE_RELEASE" \
+              --target "$GITHUB_SHA" \
+              --title "Multi-Sport Paper State" \
+              --notes "Rolling compressed SQLite state for the test-only multi-sport bot."
+            gh release upload "$STATE_RELEASE" state/our_multisport_bot.sqlite3.gz
+          fi
+
+
+      - name: Export revised research evidence
+        if: success()
+        run: |
+          python scripts/export_revised_research.py --database var/our_multisport_bot.sqlite3 --output var/revised-evidence.json
+      - uses: actions/upload-artifact@v7
+        if: success()
+        with:
+          name: sap-revised-evidence
+          path: var/revised-evidence.json
+          retention-days: 7
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: public-multisport-research
+          path: var/public-research
+          retention-days: 7

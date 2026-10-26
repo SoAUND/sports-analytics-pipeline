@@ -1,0 +1,182 @@
+[
+  {
+    "source_key": "nfl_teams",
+    "display_name": "NFL Teams",
+    "category": "official_identity",
+    "priority": 1,
+    "base_url": "https://www.nfl.com/teams/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official team names and team sites."
+  },
+  {
+    "source_key": "nfl_schedule",
+    "display_name": "NFL Schedule",
+    "category": "official_schedule",
+    "priority": 1,
+    "base_url": "https://www.nfl.com/schedules/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official games, dates, and kickoff times."
+  },
+  {
+    "source_key": "nfl_injuries",
+    "display_name": "NFL Injury Report",
+    "category": "official_injuries",
+    "priority": 1,
+    "base_url": "https://www.nfl.com/injuries/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official practice participation and game designations."
+  },
+  {
+    "source_key": "nfl_transactions",
+    "display_name": "NFL Transactions",
+    "category": "official_transactions",
+    "priority": 1,
+    "base_url": "https://www.nfl.com/transactions/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official roster transactions."
+  },
+  {
+    "source_key": "nfl_stats",
+    "display_name": "NFL Statistics",
+    "category": "official_statistics",
+    "priority": 1,
+    "base_url": "https://www.nfl.com/stats/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official basic team and player statistics."
+  },
+  {
+    "source_key": "the_odds_api",
+    "display_name": "The Odds API",
+    "category": "licensed_odds_feed",
+    "priority": 2,
+    "base_url": "https://api.the-odds-api.com/v4/",
+    "official": 0,
+    "enabled": 1,
+    "notes": "Current spread prices and licensed historical snapshots when available."
+  },
+  {
+    "source_key": "therundown",
+    "display_name": "TheRundown API",
+    "category": "licensed_odds_feed",
+    "priority": 2,
+    "base_url": "https://therundown.io/api/v2/",
+    "official": 0,
+    "enabled": 1,
+    "notes": "Current NFL spread prices from approved sportsbooks; free access is used for forward testing only."
+  },
+  {
+    "source_key": "nflverse",
+    "display_name": "nflverse",
+    "category": "football_data",
+    "priority": 2,
+    "base_url": "https://nflverse.nflverse.com/",
+    "official": 0,
+    "enabled": 1,
+    "notes": "Schedules, rosters, play-by-play, and derived football data."
+  },
+  {
+    "source_key": "pro_football_reference",
+    "display_name": "Pro Football Reference",
+    "category": "football_statistics",
+    "priority": 2,
+    "base_url": "https://www.pro-football-reference.com/",
+    "official": 0,
+    "enabled": 1,
+    "notes": "Historical and recent NFL performance research."
+  },
+  {
+    "source_key": "nws",
+    "display_name": "National Weather Service API",
+    "category": "official_weather",
+    "priority": 1,
+    "base_url": "https://api.weather.gov/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Forecasts and alerts; future requests must include an identifying User-Agent."
+  },
+  {
+    "source_key": "mlb_teams",
+    "display_name": "MLB Teams",
+    "category": "official_identity",
+    "priority": 1,
+    "base_url": "https://www.mlb.com/team",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official MLB team identities and team sites."
+  },
+  {
+    "source_key": "mlb_injuries",
+    "display_name": "MLB Injury Report",
+    "category": "official_injuries",
+    "priority": 1,
+    "base_url": "https://www.mlb.com/injury-report",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official injury and injured-list information."
+  },
+  {
+    "source_key": "mlb_lineups",
+    "display_name": "MLB Starting Lineups",
+    "category": "official_lineups",
+    "priority": 1,
+    "base_url": "https://www.mlb.com/starting-lineups",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official batting orders and starting pitchers."
+  },
+  {
+    "source_key": "mlb_transactions",
+    "display_name": "MLB Transactions",
+    "category": "official_transactions",
+    "priority": 1,
+    "base_url": "https://www.mlb.com/transactions",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official roster transactions, call-ups, options, releases, and IL moves."
+  },
+  {
+    "source_key": "mlb_probable_pitchers",
+    "display_name": "MLB Probable Pitchers",
+    "category": "official_starters",
+    "priority": 1,
+    "base_url": "https://www.mlb.com/probable-pitchers",
+    "official": 1,
+    "enabled": 1,
+    "notes": "Official probable starting pitchers."
+  },
+  {
+    "source_key": "baseball_savant",
+    "display_name": "Baseball Savant",
+    "category": "baseball_analytics",
+    "priority": 2,
+    "base_url": "https://baseballsavant.mlb.com/",
+    "official": 1,
+    "enabled": 1,
+    "notes": "MLB Statcast and advanced baseball analytics."
+  },
+  {
+    "source_key": "fangraphs",
+    "display_name": "FanGraphs",
+    "category": "baseball_analytics",
+    "priority": 2,
+    "base_url": "https://www.fangraphs.com/",
+    "official": 0,
+    "enabled": 1,
+    "notes": "Advanced hitting, pitching, projections, and bullpen analytics."
+  },
+  {
+    "source_key": "baseball_reference",
+    "display_name": "Baseball Reference",
+    "category": "baseball_statistics",
+    "priority": 2,
+    "base_url": "https://www.baseball-reference.com/",
+    "official": 0,
+    "enabled": 1,
+    "notes": "MLB game logs, splits, historical statistics, and team records."
+  }
+]

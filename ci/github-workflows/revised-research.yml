@@ -1,0 +1,139 @@
+name: Revised Research Cadence
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/revised-research.yml
+  schedule:
+    # Offset polling plus explicit daily wakes; Python gates on Eastern time/DST.
+    - cron: '2-57/5 * * * *'
+    - cron: '0 4,5 * * *'
+    - cron: '0 14,15 * * *'
+  workflow_dispatch:
+    inputs:
+      check_adapters:
+        description: 'Check new keys only; no Telegram delivery or paid odds request'
+        type: boolean
+        default: false
+      run_now:
+        description: 'Fresh scan of remaining games today, independent of scheduled jobs'
+        type: boolean
+        default: false
+      send:
+        description: 'Deliver research cards to the existing Telegram channel'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: sap-revised-research
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    env:
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      EXPERIMENTAL_CALLS_ENABLED: 'true'
+      THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      NHL_CFB_ODDS_API_KEY: ${{ secrets.NHL_CFB_ODDS_API_KEY }}
+      CFBD_2_API_KEY: ${{ secrets.CFBD_2_API_KEY }}
+      SAP_RESEARCH_CANDIDATES_URL: ${{ vars.SAP_RESEARCH_CANDIDATES_URL }}
+      SAP_RESEARCH_INPUT: data/research_candidates/current.json
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      ACCESSIBLE_BOOKMAKERS: ${{ vars.ACCESSIBLE_BOOKMAKERS }}
+      MARKET_CONSENSUS_BOOKMAKERS: ${{ vars.MARKET_CONSENSUS_BOOKMAKERS }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install .
+      - name: Restore durable cadence state
+        run: |
+          mkdir -p var
+          if gh release view sap-revised-research-state >/dev/null 2>&1; then
+            gh release download sap-revised-research-state --pattern revised_research.sqlite3 --dir var
+          fi
+      - name: Check new adapter connections
+        if: github.event_name == 'workflow_dispatch' && inputs.check_adapters
+        run: python scripts/collect_supplemental_research.py --check-connections
+      - name: Retrieve latest native research evidence
+        if: github.event_name != 'workflow_dispatch' || !inputs.check_adapters
+        run: |
+          RUN_ID=$(gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=sap-revised-evidence&per_page=100" --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')
+          if [ -n "$RUN_ID" ]; then
+            mkdir -p data/research_candidates
+            gh run download "$RUN_ID" --name sap-revised-evidence --dir data/research_candidates
+            mv data/research_candidates/revised-evidence.json data/research_candidates/current.json
+          fi
+      - name: Collect NHL and college football for due jobs
+        if: github.event_name != 'workflow_dispatch' || !inputs.check_adapters
+        run: python scripts/collect_supplemental_research.py
+      - name: Run due ET jobs only
+        if: github.event_name != 'workflow_dispatch' || !inputs.check_adapters
+        env:
+          # Push-based cadence jobs are replayable by the independent scheduler.
+          SEND: ${{ github.event_name == 'schedule' || github.event_name == 'push' || inputs.send }}
+          RUN_NOW: ${{ inputs.run_now || (github.event_name == 'push' && contains(github.event.head_commit.message, '[fresh-research]')) }}
+        run: |
+          args=()
+          if [ "$SEND" = "true" ]; then
+            args+=(--send)
+          fi
+          if [ "$RUN_NOW" = "true" ]; then
+            args+=(--run-now)
+          fi
+          python scripts/run_revised_research.py "${args[@]}"
+      - name: Publish pick cards to the run summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          cards = sorted(Path('var/revised-cards').glob('card-*.txt'))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('## research cards\n\n')
+              if not cards:
+                  summary.write('No new card was generated. Check the scan step for its result.\n')
+              remaining = 200000
+              for card in cards:
+                  text = card.read_text()
+                  print(f'Card: {card.name}\n{text[:60000]}')
+                  if remaining > 0:
+                      excerpt = text[:min(60000, remaining)]
+                      summary.write(f'### {card.name}\n\n{excerpt}\n\n')
+                      remaining -= len(excerpt)
+          PY
+      - name: Save durable cadence state
+        if: always() && hashFiles('var/revised_research.sqlite3') != ''
+        run: |
+          if ! gh release view sap-revised-research-state >/dev/null 2>&1; then
+            gh release create sap-revised-research-state --title 'Research State' --notes 'Durable research cadence, outbox and audit; no real-money actions.'
+          fi
+          gh release upload sap-revised-research-state var/revised_research.sqlite3 --clobber
+      - name: Save reports outside Actions artifact storage
+        if: always() && hashFiles('var/revised-cards/**') != ''
+        run: |
+          paths=(revised-cards)
+          if [ -d var/public-research ]; then
+            paths+=(public-research)
+          fi
+          tar -czf var/revised-research-reports.tar.gz -C var "${paths[@]}"
+          if ! gh release view sap-revised-research-state >/dev/null 2>&1; then
+            gh release create sap-revised-research-state --title 'Research State' --notes 'Durable research cadence, outbox and audit; no real-money actions.'
+          fi
+          gh release upload sap-revised-research-state var/revised-research-reports.tar.gz --clobber
+      - uses: actions/upload-artifact@v7
+        if: always()
+        continue-on-error: true
+        with:
+          name: revised-research-cards
+          path: |
+            var/revised-cards
+            var/public-research
+          retention-days: 3
+
+# Resume durable pending deliveries after rate limits; do not create manual batches.

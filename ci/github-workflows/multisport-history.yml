@@ -1,0 +1,285 @@
+name: Multi-Sport Historical Collector
+
+on:
+  schedule:
+    - cron: "43 8 * * *"
+  workflow_dispatch:
+    inputs:
+      sports:
+        description: "Comma-separated sports: nfl,mlb,nba,wnba,epl,mma,atp,wta"
+        required: true
+        default: "nfl,mlb,nba,wnba,epl,mma,atp,wta"
+        type: string
+      run_history:
+        description: "Run the bounded historical collector"
+        required: true
+        default: true
+        type: boolean
+      include_historical_odds:
+        description: "Also fetch bounded per-event closing odds"
+        required: true
+        default: false
+        type: boolean
+      build_examples:
+        description: "Build leakage-safe EPL training examples from stored evidence"
+        required: true
+        default: true
+        type: boolean
+      backfill_epl_features:
+        description: "Backfill safe EPL form, strength, rest, and congestion features"
+        required: true
+        default: false
+        type: boolean
+      history_start:
+        description: "UTC range start; clear both date fields to use the rolling window"
+        required: false
+        default: "2026-03-01T00:00:00+00:00"
+        type: string
+      history_end:
+        description: "UTC range end; clear both date fields to use the rolling window"
+        required: false
+        default: "2026-06-01T00:00:00+00:00"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: multisport-paper-database
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+      sports: ${{ steps.gate.outputs.sports }}
+      include_odds: ${{ steps.gate.outputs.include_odds }}
+      run_history: ${{ steps.gate.outputs.run_history }}
+      build_examples: ${{ steps.gate.outputs.build_examples }}
+      backfill_epl_features: ${{ steps.gate.outputs.backfill_epl_features }}
+      history_start: ${{ steps.gate.outputs.history_start }}
+      history_end: ${{ steps.gate.outputs.history_end }}
+      verified_epl_odds_only: ${{ steps.gate.outputs.verified_epl_odds_only }}
+    steps:
+      - name: Resolve historical scheduler gate
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          ENABLED: ${{ vars.MULTISPORT_HISTORY_AUTOMATION_ENABLED }}
+          DEFAULT_SPORTS: ${{ vars.MULTISPORT_HISTORY_AUTOMATION_SPORTS }}
+          SCHEDULED_ODDS: ${{ vars.MULTISPORT_HISTORY_ODDS_ENABLED }}
+          INPUT_SPORTS: ${{ inputs.sports }}
+          INPUT_RUN: ${{ inputs.run_history }}
+          INPUT_ODDS: ${{ inputs.include_historical_odds }}
+          INPUT_BUILD: ${{ inputs.build_examples }}
+          INPUT_BACKFILL_EPL: ${{ inputs.backfill_epl_features }}
+          INPUT_HISTORY_START: ${{ inputs.history_start }}
+          INPUT_HISTORY_END: ${{ inputs.history_end }}
+        run: |
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            if [ "$ENABLED" = "true" ]; then
+              echo "should_run=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "Scheduled historical collection is safely disabled."
+              echo "should_run=false" >> "$GITHUB_OUTPUT"
+            fi
+            SPORTS="${DEFAULT_SPORTS:-nfl,mlb,nba,wnba,epl,mma,atp,wta}"
+            for REQUIRED_SPORT in nfl mlb nba wnba epl mma atp wta; do
+              case ",$SPORTS," in
+                *,$REQUIRED_SPORT,*) ;;
+                *) SPORTS="${SPORTS:+$SPORTS,}$REQUIRED_SPORT" ;;
+              esac
+            done
+            INCLUDE_ODDS="${SCHEDULED_ODDS:-false}"
+            RUN_HISTORY=true
+            BUILD_EXAMPLES=true
+            BACKFILL_EPL=false
+            HISTORY_START=""
+            HISTORY_END=""
+          else
+            RUN_HISTORY="${INPUT_RUN:-false}"
+            BUILD_EXAMPLES="${INPUT_BUILD:-true}"
+            BACKFILL_EPL="${INPUT_BACKFILL_EPL:-false}"
+            if [ "$RUN_HISTORY" = "true" ] || [ "$BUILD_EXAMPLES" = "true" ] || [ "$BACKFILL_EPL" = "true" ]; then
+              echo "should_run=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "should_run=false" >> "$GITHUB_OUTPUT"
+            fi
+            SPORTS="${INPUT_SPORTS:-nfl,mlb,nba,wnba,epl,mma,atp,wta}"
+            INCLUDE_ODDS="${INPUT_ODDS:-false}"
+            HISTORY_START="$INPUT_HISTORY_START"
+            HISTORY_END="$INPUT_HISTORY_END"
+          fi
+          if { [ -n "$HISTORY_START" ] && [ -z "$HISTORY_END" ]; } || \
+             { [ -z "$HISTORY_START" ] && [ -n "$HISTORY_END" ]; }; then
+            echo "history_start and history_end must be supplied together." >&2
+            exit 1
+          fi
+          VERIFIED_EPL_ODDS_ONLY=false
+          if [ "$INCLUDE_ODDS" = "true" ] && \
+             [ "$SPORTS" = "epl" ]; then
+            VERIFIED_EPL_ODDS_ONLY=true
+          fi
+          echo "sports=$SPORTS" >> "$GITHUB_OUTPUT"
+          echo "include_odds=$INCLUDE_ODDS" >> "$GITHUB_OUTPUT"
+          echo "run_history=$RUN_HISTORY" >> "$GITHUB_OUTPUT"
+          echo "build_examples=$BUILD_EXAMPLES" >> "$GITHUB_OUTPUT"
+          echo "backfill_epl_features=$BACKFILL_EPL" >> "$GITHUB_OUTPUT"
+          echo "history_start=$HISTORY_START" >> "$GITHUB_OUTPUT"
+          echo "history_end=$HISTORY_END" >> "$GITHUB_OUTPUT"
+          echo "verified_epl_odds_only=$VERIFIED_EPL_ODDS_ONLY" >> "$GITHUB_OUTPUT"
+
+  collect:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    env:
+      BOT_MODE: research
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      DATABASE_PATH: var/our_multisport_bot.sqlite3
+      HTTP_TIMEOUT_SECONDS: ${{ vars.HTTP_TIMEOUT_SECONDS || '20' }}
+      HTTP_RETRY_ATTEMPTS: ${{ vars.HTTP_RETRY_ATTEMPTS || '3' }}
+      MULTISPORT_HISTORY_LOOKBACK_DAYS: ${{ vars.MULTISPORT_HISTORY_LOOKBACK_DAYS || '3' }}
+      MULTISPORT_HISTORY_MAX_REQUESTS: ${{ vars.MULTISPORT_HISTORY_MAX_REQUESTS || '30' }}
+      MULTISPORT_HISTORY_MAX_LEAGUES_PER_SPORT: ${{ vars.MULTISPORT_HISTORY_MAX_LEAGUES_PER_SPORT || '5' }}
+      MULTISPORT_HISTORY_MAX_ODDS_EVENTS: ${{ vars.MULTISPORT_HISTORY_MAX_ODDS_EVENTS || '10' }}
+      ODDS_API_IO_HISTORY_BOOKMAKERS: ${{ vars.ODDS_API_IO_HISTORY_BOOKMAKERS }}
+      ODDS_API_IO_KEY: ${{ secrets.ODDS_API_IO_KEY }}
+      FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Verify protected historical configuration
+        run: |
+          python - <<'PY'
+          from sports_analytics_pipeline.config import Settings
+          settings = Settings.load('.env')
+          if settings.bot_mode not in {'research', 'test_only'}:
+              raise SystemExit('BOT_MODE must remain research or test_only')
+          if not settings.odds_api_io_key:
+              raise SystemExit('ODDS_API_IO_KEY is required')
+          print('Protected historical configuration verified.')
+          PY
+
+      - name: Prepare database folders
+        run: mkdir -p var restore backup
+
+      - name: Find latest canonical multi-sport database
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_ID="$(gh api \
+            "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=multisport-paper-database&per_page=100" \
+            --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Restore previous multi-sport database
+        if: steps.previous.outputs.run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ steps.previous.outputs.run_id }}" \
+            --name multisport-paper-database \
+            --dir restore
+          test -f restore/our_multisport_bot.sqlite3
+          cp restore/our_multisport_bot.sqlite3 var/our_multisport_bot.sqlite3
+
+      - name: Initialize first multi-sport database
+        if: steps.previous.outputs.run_id == ''
+        run: python scripts/run_multisport_operations.py bootstrap
+
+      - name: Save pre-run recovery copy
+        run: cp var/our_multisport_bot.sqlite3 backup/our_multisport_bot.sqlite3
+
+      - name: Collect bounded historical data
+        if: needs.gate.outputs.run_history == 'true'
+        env:
+          SPORTS: ${{ needs.gate.outputs.sports }}
+          INCLUDE_ODDS: ${{ needs.gate.outputs.include_odds }}
+          HISTORY_START: ${{ needs.gate.outputs.history_start }}
+          HISTORY_END: ${{ needs.gate.outputs.history_end }}
+          VERIFIED_EPL_ODDS_ONLY: ${{ needs.gate.outputs.verified_epl_odds_only }}
+        run: |
+          ARGS=(history-collect --sports "$SPORTS")
+          if [ -n "$HISTORY_START" ]; then
+            ARGS+=(--start "$HISTORY_START" --end "$HISTORY_END")
+          fi
+          if [ "$INCLUDE_ODDS" = "true" ] && [ "$VERIFIED_EPL_ODDS_ONLY" != "true" ]; then
+            ARGS+=(--include-odds)
+          fi
+          python scripts/run_multisport_operations.py "${ARGS[@]}"
+
+      - name: Show historical training status
+        if: always()
+        run: |
+          python scripts/run_multisport_operations.py history-collection-status
+          python scripts/run_multisport_operations.py history-status
+
+      - name: Backfill safe EPL result-derived features
+        if: success() && needs.gate.outputs.backfill_epl_features == 'true'
+        run: |
+          python scripts/run_multisport_operations.py history-backfill-epl-features --max-requests 4
+
+      - name: Collect officially verified EPL closing odds
+        if: success() && needs.gate.outputs.verified_epl_odds_only == 'true'
+        env:
+          SPORTS: ${{ needs.gate.outputs.sports }}
+          HISTORY_START: ${{ needs.gate.outputs.history_start }}
+          HISTORY_END: ${{ needs.gate.outputs.history_end }}
+        run: |
+          ARGS=(history-collect --sports "$SPORTS" --include-odds --verified-epl-odds-only --odds-only)
+          if [ -n "$HISTORY_START" ]; then
+            ARGS+=(--start "$HISTORY_START" --end "$HISTORY_END")
+          fi
+          python scripts/run_multisport_operations.py "${ARGS[@]}"
+
+      - name: Build leakage-safe EPL training examples
+        if: success() && needs.gate.outputs.build_examples == 'true'
+        run: |
+          python scripts/run_multisport_operations.py history-build-examples --sports epl
+
+      - name: Checkpoint SQLite before artifact
+        if: success()
+        run: |
+          python - <<'PY'
+          import sqlite3
+          db = sqlite3.connect('var/our_multisport_bot.sqlite3')
+          db.execute('PRAGMA wal_checkpoint(FULL)')
+          db.close()
+          PY
+
+      - name: Save canonical multi-sport database
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: multisport-paper-database
+          path: var/our_multisport_bot.sqlite3
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Preserve failed state for diagnosis
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: multisport-history-failed-${{ github.run_id }}
+          path: |
+            var/our_multisport_bot.sqlite3
+            backup/our_multisport_bot.sqlite3
+          if-no-files-found: ignore
+          retention-days: 30
+

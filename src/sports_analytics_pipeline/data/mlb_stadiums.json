@@ -1,0 +1,605 @@
+[
+  {
+    "stadium_id": "chase_field",
+    "official_name": "Chase Field",
+    "city": "Phoenix",
+    "state_or_region": "AZ",
+    "country_code": "US",
+    "latitude": 33.4453,
+    "longitude": -112.0667,
+    "time_zone": "America/Phoenix",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/dbacks/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:15"
+    ]
+  },
+  {
+    "stadium_id": "truist_park",
+    "official_name": "Truist Park",
+    "city": "Atlanta",
+    "state_or_region": "GA",
+    "country_code": "US",
+    "latitude": 33.8907,
+    "longitude": -84.4677,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/braves/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:4705"
+    ]
+  },
+  {
+    "stadium_id": "camden_yards",
+    "official_name": "Oriole Park at Camden Yards",
+    "city": "Baltimore",
+    "state_or_region": "MD",
+    "country_code": "US",
+    "latitude": 39.2839,
+    "longitude": -76.6217,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/orioles/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2"
+    ]
+  },
+  {
+    "stadium_id": "fenway_park",
+    "official_name": "Fenway Park",
+    "city": "Boston",
+    "state_or_region": "MA",
+    "country_code": "US",
+    "latitude": 42.3467,
+    "longitude": -71.0972,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/redsox/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:3"
+    ]
+  },
+  {
+    "stadium_id": "rate_field",
+    "official_name": "Rate Field",
+    "city": "Chicago",
+    "state_or_region": "IL",
+    "country_code": "US",
+    "latitude": 41.83,
+    "longitude": -87.6339,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/whitesox/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:4"
+    ]
+  },
+  {
+    "stadium_id": "wrigley_field",
+    "official_name": "Wrigley Field",
+    "city": "Chicago",
+    "state_or_region": "IL",
+    "country_code": "US",
+    "latitude": 41.9484,
+    "longitude": -87.6553,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/cubs/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:17"
+    ]
+  },
+  {
+    "stadium_id": "great_american_ball_park",
+    "official_name": "Great American Ball Park",
+    "city": "Cincinnati",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "latitude": 39.0979,
+    "longitude": -84.5082,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/reds/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2602"
+    ]
+  },
+  {
+    "stadium_id": "progressive_field",
+    "official_name": "Progressive Field",
+    "city": "Cleveland",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "latitude": 41.4962,
+    "longitude": -81.6852,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/guardians/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:5"
+    ]
+  },
+  {
+    "stadium_id": "coors_field",
+    "official_name": "Coors Field",
+    "city": "Denver",
+    "state_or_region": "CO",
+    "country_code": "US",
+    "latitude": 39.7559,
+    "longitude": -104.9942,
+    "time_zone": "America/Denver",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/rockies/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:19"
+    ]
+  },
+  {
+    "stadium_id": "comerica_park",
+    "official_name": "Comerica Park",
+    "city": "Detroit",
+    "state_or_region": "MI",
+    "country_code": "US",
+    "latitude": 42.339,
+    "longitude": -83.0485,
+    "time_zone": "America/Detroit",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/tigers/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2394"
+    ]
+  },
+  {
+    "stadium_id": "daikin_park",
+    "official_name": "Daikin Park",
+    "city": "Houston",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "latitude": 29.7573,
+    "longitude": -95.3555,
+    "time_zone": "America/Chicago",
+    "roof_type": "retractable",
+    "surface_type": "natural_grass",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/astros/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2392"
+    ]
+  },
+  {
+    "stadium_id": "kauffman_stadium",
+    "official_name": "Kauffman Stadium",
+    "city": "Kansas City",
+    "state_or_region": "MO",
+    "country_code": "US",
+    "latitude": 39.0517,
+    "longitude": -94.4803,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/royals/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:7"
+    ]
+  },
+  {
+    "stadium_id": "angel_stadium",
+    "official_name": "Angel Stadium",
+    "city": "Anaheim",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 33.8003,
+    "longitude": -117.8827,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/angels/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:1"
+    ]
+  },
+  {
+    "stadium_id": "dodger_stadium",
+    "official_name": "UNIQLO Field at Dodger Stadium",
+    "city": "Los Angeles",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 34.0739,
+    "longitude": -118.24,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-22",
+    "source_url": "https://www.mlb.com/dodgers/ballpark",
+    "aliases": [
+      "Dodger Stadium"
+    ],
+    "provider_ids": [
+      "mlb_statsapi:22"
+    ]
+  },
+  {
+    "stadium_id": "loandepot_park",
+    "official_name": "loanDepot park",
+    "city": "Miami",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "latitude": 25.7781,
+    "longitude": -80.2197,
+    "time_zone": "America/New_York",
+    "roof_type": "retractable",
+    "surface_type": "natural_grass",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/marlins/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:4169"
+    ]
+  },
+  {
+    "stadium_id": "american_family_field",
+    "official_name": "American Family Field",
+    "city": "Milwaukee",
+    "state_or_region": "WI",
+    "country_code": "US",
+    "latitude": 43.028,
+    "longitude": -87.9712,
+    "time_zone": "America/Chicago",
+    "roof_type": "retractable",
+    "surface_type": "natural_grass",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/brewers/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:32"
+    ]
+  },
+  {
+    "stadium_id": "target_field",
+    "official_name": "Target Field",
+    "city": "Minneapolis",
+    "state_or_region": "MN",
+    "country_code": "US",
+    "latitude": 44.9817,
+    "longitude": -93.2776,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/twins/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:3312"
+    ]
+  },
+  {
+    "stadium_id": "citi_field",
+    "official_name": "Citi Field",
+    "city": "Queens",
+    "state_or_region": "NY",
+    "country_code": "US",
+    "latitude": 40.7571,
+    "longitude": -73.8458,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/mets/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:3289"
+    ]
+  },
+  {
+    "stadium_id": "yankee_stadium",
+    "official_name": "Yankee Stadium",
+    "city": "Bronx",
+    "state_or_region": "NY",
+    "country_code": "US",
+    "latitude": 40.8296,
+    "longitude": -73.9262,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/yankees/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:3313"
+    ]
+  },
+  {
+    "stadium_id": "sutter_health_park",
+    "official_name": "Sutter Health Park",
+    "city": "West Sacramento",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 38.5804,
+    "longitude": -121.5132,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/athletics/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2529"
+    ]
+  },
+  {
+    "stadium_id": "citizens_bank_park",
+    "official_name": "Citizens Bank Park",
+    "city": "Philadelphia",
+    "state_or_region": "PA",
+    "country_code": "US",
+    "latitude": 39.9061,
+    "longitude": -75.1665,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/phillies/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2681"
+    ]
+  },
+  {
+    "stadium_id": "pnc_park",
+    "official_name": "PNC Park",
+    "city": "Pittsburgh",
+    "state_or_region": "PA",
+    "country_code": "US",
+    "latitude": 40.4469,
+    "longitude": -80.0057,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/pirates/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:31"
+    ]
+  },
+  {
+    "stadium_id": "petco_park",
+    "official_name": "Petco Park",
+    "city": "San Diego",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 32.7076,
+    "longitude": -117.157,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/padres/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2680"
+    ]
+  },
+  {
+    "stadium_id": "oracle_park",
+    "official_name": "Oracle Park",
+    "city": "San Francisco",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 37.7786,
+    "longitude": -122.3893,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/giants/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2395"
+    ]
+  },
+  {
+    "stadium_id": "t_mobile_park",
+    "official_name": "T-Mobile Park",
+    "city": "Seattle",
+    "state_or_region": "WA",
+    "country_code": "US",
+    "latitude": 47.5914,
+    "longitude": -122.3325,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "retractable",
+    "surface_type": "natural_grass",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/mariners/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:680"
+    ]
+  },
+  {
+    "stadium_id": "busch_stadium",
+    "official_name": "Busch Stadium",
+    "city": "St. Louis",
+    "state_or_region": "MO",
+    "country_code": "US",
+    "latitude": 38.6226,
+    "longitude": -90.1928,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/cardinals/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:2889"
+    ]
+  },
+  {
+    "stadium_id": "tropicana_field",
+    "official_name": "Tropicana Field",
+    "city": "St. Petersburg",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "latitude": 27.7682,
+    "longitude": -82.6534,
+    "time_zone": "America/New_York",
+    "roof_type": "fixed",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/rays/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:12"
+    ]
+  },
+  {
+    "stadium_id": "globe_life_field",
+    "official_name": "Globe Life Field",
+    "city": "Arlington",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "latitude": 32.7473,
+    "longitude": -97.0848,
+    "time_zone": "America/Chicago",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/rangers/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:5325"
+    ]
+  },
+  {
+    "stadium_id": "rogers_centre",
+    "official_name": "Rogers Centre",
+    "city": "Toronto",
+    "state_or_region": "ON",
+    "country_code": "CA",
+    "latitude": 43.6414,
+    "longitude": -79.3894,
+    "time_zone": "America/Toronto",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/bluejays/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:14"
+    ]
+  },
+  {
+    "stadium_id": "nationals_park",
+    "official_name": "Nationals Park",
+    "city": "Washington",
+    "state_or_region": "DC",
+    "country_code": "US",
+    "latitude": 38.873,
+    "longitude": -77.0074,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-15",
+    "source_url": "https://www.mlb.com/nationals/ballpark",
+    "provider_ids": [
+      "mlb_statsapi:3309"
+    ]
+  }
+]

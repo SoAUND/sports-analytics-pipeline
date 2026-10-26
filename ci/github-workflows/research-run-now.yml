@@ -1,0 +1,104 @@
+name: On-Demand Research
+# Experimental requests have no daily/monthly count cap; cache and reserve remain.
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-run-now.yml
+  workflow_dispatch:
+    inputs:
+      check_adapters:
+        description: 'Check new keys only; no Telegram delivery or paid odds request'
+        type: boolean
+        default: false
+      send:
+        description: 'Deliver research cards to the existing Telegram channel'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: sap-revised-research
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    env:
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      EXPERIMENTAL_CALLS_ENABLED: 'true'
+      THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      NHL_CFB_ODDS_API_KEY: ${{ secrets.NHL_CFB_ODDS_API_KEY }}
+      CFBD_2_API_KEY: ${{ secrets.CFBD_2_API_KEY }}
+      SAP_RESEARCH_CANDIDATES_URL: ${{ vars.SAP_RESEARCH_CANDIDATES_URL }}
+      SAP_RESEARCH_INPUT: data/research_candidates/current.json
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      ACCESSIBLE_BOOKMAKERS: ${{ vars.ACCESSIBLE_BOOKMAKERS }}
+      MARKET_CONSENSUS_BOOKMAKERS: ${{ vars.MARKET_CONSENSUS_BOOKMAKERS }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install .
+      - name: Restore durable cadence state
+        run: |
+          mkdir -p var
+          if gh release view sap-revised-research-state >/dev/null 2>&1; then
+            gh release download sap-revised-research-state --pattern revised_research.sqlite3 --dir var
+          fi
+      - name: Check new adapter connections
+        if: github.event_name == 'workflow_dispatch' && inputs.check_adapters
+        run: python scripts/collect_supplemental_research.py --check-connections
+      - name: Retrieve latest native research evidence
+        if: github.event_name != 'workflow_dispatch' || !inputs.check_adapters
+        run: |
+          RUN_ID=$(gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=sap-revised-evidence&per_page=100" --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')
+          if [ -n "$RUN_ID" ]; then
+            mkdir -p data/research_candidates
+            gh run download "$RUN_ID" --name sap-revised-evidence --dir data/research_candidates
+            mv data/research_candidates/revised-evidence.json data/research_candidates/current.json
+          fi
+      - name: Collect NHL and college football for due jobs
+        if: github.event_name != 'workflow_dispatch' || !inputs.check_adapters
+        run: python scripts/collect_supplemental_research.py --run-now
+      - name: Review remaining games today and deliver the card
+        if: github.event_name != 'workflow_dispatch' || !inputs.check_adapters
+        env:
+          SEND: ${{ github.event_name == 'push' || inputs.send }}
+        run: |
+          if [ "$SEND" = "true" ]; then
+            python scripts/run_revised_research.py --run-now --send
+          else
+            python scripts/run_revised_research.py --run-now
+          fi
+      - name: Save durable cadence state
+        if: always() && hashFiles('var/revised_research.sqlite3') != ''
+        run: |
+          if ! gh release view sap-revised-research-state >/dev/null 2>&1; then
+            gh release create sap-revised-research-state --title 'Research State' --notes 'Durable research cadence, outbox and audit; no real-money actions.'
+          fi
+          gh release upload sap-revised-research-state var/revised_research.sqlite3 --clobber
+      - uses: actions/upload-artifact@v7
+        if: always()
+        continue-on-error: true
+        with:
+          name: on-demand-research-cards
+          path: |
+            var/revised-cards
+            var/public-research
+          retention-days: 3
+
+# Discover every active league and check every current event moneyline; audit other markets.
+
+# Reuse free slate discovery safely when running the current evaluation.
+
+# Verify Eastern dates and official basketball/Argentine fallbacks: 2026-10-05 18:48 ET.
+
+# User-requested end-to-end Telegram test: 2026-10-08 UTC; qualification gates unchanged.
+
+# Verify fresh scan after pending-outbox fix (PR 132): 2026-10-08 UTC.
+
+# Post-merge verification uses the deployed fresh-scan fix: PR 132.

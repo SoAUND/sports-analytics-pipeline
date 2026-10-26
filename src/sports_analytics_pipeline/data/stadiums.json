@@ -1,0 +1,779 @@
+[
+  {
+    "stadium_id": "state_farm_stadium",
+    "official_name": "State Farm Stadium",
+    "city": "Glendale",
+    "state_or_region": "AZ",
+    "country_code": "US",
+    "latitude": 33.5276,
+    "longitude": -112.2626,
+    "time_zone": "America/Phoenix",
+    "roof_type": "retractable",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.azcardinals.com/stadium/",
+    "provider_ids": [
+      "espn:3970"
+    ]
+  },
+  {
+    "stadium_id": "mercedes_benz_stadium",
+    "official_name": "Mercedes-Benz Stadium",
+    "city": "Atlanta",
+    "state_or_region": "GA",
+    "country_code": "US",
+    "latitude": 33.7554,
+    "longitude": -84.4008,
+    "time_zone": "America/New_York",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.atlantafalcons.com/stadium/",
+    "provider_ids": [
+      "espn:5348"
+    ]
+  },
+  {
+    "stadium_id": "mt_bank_stadium",
+    "official_name": "M&T Bank Stadium",
+    "city": "Baltimore",
+    "state_or_region": "MD",
+    "country_code": "US",
+    "latitude": 39.278,
+    "longitude": -76.6227,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.baltimoreravens.com/stadium/",
+    "provider_ids": [
+      "espn:3814"
+    ]
+  },
+  {
+    "stadium_id": "highmark_stadium_2026",
+    "official_name": "Highmark Stadium",
+    "city": "Orchard Park",
+    "state_or_region": "NY",
+    "country_code": "US",
+    "latitude": 42.7738,
+    "longitude": -78.787,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.buffalobills.com/stadium/",
+    "provider_ids": [
+      "espn:11938"
+    ]
+  },
+  {
+    "stadium_id": "bank_of_america_stadium",
+    "official_name": "Bank of America Stadium",
+    "city": "Charlotte",
+    "state_or_region": "NC",
+    "country_code": "US",
+    "latitude": 35.2258,
+    "longitude": -80.8528,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.panthers.com/stadium/",
+    "provider_ids": [
+      "espn:3628"
+    ]
+  },
+  {
+    "stadium_id": "soldier_field",
+    "official_name": "Soldier Field",
+    "city": "Chicago",
+    "state_or_region": "IL",
+    "country_code": "US",
+    "latitude": 41.8623,
+    "longitude": -87.6167,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.chicagobears.com/game-day/",
+    "provider_ids": [
+      "espn:3933"
+    ]
+  },
+  {
+    "stadium_id": "paycor_stadium",
+    "official_name": "Paycor Stadium",
+    "city": "Cincinnati",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "latitude": 39.0954,
+    "longitude": -84.516,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.bengals.com/stadium/",
+    "provider_ids": [
+      "espn:3874"
+    ]
+  },
+  {
+    "stadium_id": "huntington_bank_field",
+    "official_name": "Huntington Bank Field",
+    "city": "Cleveland",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "latitude": 41.5061,
+    "longitude": -81.6995,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2028,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.clevelandbrowns.com/game-day/know-before-you-go",
+    "provider_ids": [
+      "espn:3679"
+    ]
+  },
+  {
+    "stadium_id": "att_stadium",
+    "official_name": "AT&T Stadium",
+    "city": "Arlington",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "latitude": 32.7473,
+    "longitude": -97.0945,
+    "time_zone": "America/Chicago",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.dallascowboys.com/stadium/",
+    "provider_ids": [
+      "espn:3687"
+    ]
+  },
+  {
+    "stadium_id": "empower_field",
+    "official_name": "Empower Field at Mile High",
+    "city": "Denver",
+    "state_or_region": "CO",
+    "country_code": "US",
+    "latitude": 39.7439,
+    "longitude": -105.0201,
+    "time_zone": "America/Denver",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.denverbroncos.com/stadium/",
+    "provider_ids": [
+      "espn:3937"
+    ]
+  },
+  {
+    "stadium_id": "ford_field",
+    "official_name": "Ford Field",
+    "city": "Detroit",
+    "state_or_region": "MI",
+    "country_code": "US",
+    "latitude": 42.34,
+    "longitude": -83.0456,
+    "time_zone": "America/Detroit",
+    "roof_type": "fixed",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.detroitlions.com/game-day/",
+    "provider_ids": [
+      "espn:3727"
+    ]
+  },
+  {
+    "stadium_id": "lambeau_field",
+    "official_name": "Lambeau Field",
+    "city": "Green Bay",
+    "state_or_region": "WI",
+    "country_code": "US",
+    "latitude": 44.5013,
+    "longitude": -88.0622,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "hybrid_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.packers.com/lambeau-field/",
+    "provider_ids": [
+      "espn:3798"
+    ]
+  },
+  {
+    "stadium_id": "nrg_stadium",
+    "official_name": "NRG Stadium",
+    "city": "Houston",
+    "state_or_region": "TX",
+    "country_code": "US",
+    "latitude": 29.6847,
+    "longitude": -95.4107,
+    "time_zone": "America/Chicago",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.houstontexans.com/game-day/",
+    "provider_ids": [
+      "espn:3891"
+    ]
+  },
+  {
+    "stadium_id": "lucas_oil_stadium",
+    "official_name": "Lucas Oil Stadium",
+    "city": "Indianapolis",
+    "state_or_region": "IN",
+    "country_code": "US",
+    "latitude": 39.7601,
+    "longitude": -86.1639,
+    "time_zone": "America/Indiana/Indianapolis",
+    "roof_type": "retractable",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.colts.com/game-day/",
+    "provider_ids": [
+      "espn:3812"
+    ]
+  },
+  {
+    "stadium_id": "everbank_stadium",
+    "official_name": "EverBank Stadium",
+    "city": "Jacksonville",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "latitude": 30.3239,
+    "longitude": -81.6373,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.jaguars.com/stadium/",
+    "provider_ids": [
+      "espn:3712"
+    ]
+  },
+  {
+    "stadium_id": "arrowhead_stadium",
+    "official_name": "GEHA Field at Arrowhead Stadium",
+    "city": "Kansas City",
+    "state_or_region": "MO",
+    "country_code": "US",
+    "latitude": 39.0489,
+    "longitude": -94.4839,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.chiefs.com/stadium/",
+    "provider_ids": [
+      "espn:3622"
+    ]
+  },
+  {
+    "stadium_id": "allegiant_stadium",
+    "official_name": "Allegiant Stadium",
+    "city": "Las Vegas",
+    "state_or_region": "NV",
+    "country_code": "US",
+    "latitude": 36.0908,
+    "longitude": -115.183,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "fixed",
+    "surface_type": "natural_grass",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.raiders.com/allegiant-stadium/",
+    "provider_ids": [
+      "espn:6501"
+    ]
+  },
+  {
+    "stadium_id": "sofi_stadium",
+    "official_name": "SoFi Stadium",
+    "city": "Inglewood",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 33.9535,
+    "longitude": -118.3392,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "canopy_open_sides",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.therams.com/game-day/",
+    "provider_ids": [
+      "espn:7065"
+    ]
+  },
+  {
+    "stadium_id": "hard_rock_stadium",
+    "official_name": "Hard Rock Stadium",
+    "city": "Miami Gardens",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "latitude": 25.958,
+    "longitude": -80.2389,
+    "time_zone": "America/New_York",
+    "roof_type": "canopy_open_sides",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.miamidolphins.com/hard-rock-stadium/",
+    "provider_ids": [
+      "espn:3948"
+    ]
+  },
+  {
+    "stadium_id": "us_bank_stadium",
+    "official_name": "U.S. Bank Stadium",
+    "city": "Minneapolis",
+    "state_or_region": "MN",
+    "country_code": "US",
+    "latitude": 44.9736,
+    "longitude": -93.2575,
+    "time_zone": "America/Chicago",
+    "roof_type": "fixed",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.vikings.com/stadium/",
+    "provider_ids": [
+      "espn:5239"
+    ]
+  },
+  {
+    "stadium_id": "gillette_stadium",
+    "official_name": "Gillette Stadium",
+    "city": "Foxborough",
+    "state_or_region": "MA",
+    "country_code": "US",
+    "latitude": 42.0909,
+    "longitude": -71.2643,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.patriots.com/game-day/",
+    "provider_ids": [
+      "espn:3738"
+    ]
+  },
+  {
+    "stadium_id": "caesars_superdome",
+    "official_name": "Caesars Superdome",
+    "city": "New Orleans",
+    "state_or_region": "LA",
+    "country_code": "US",
+    "latitude": 29.9511,
+    "longitude": -90.0812,
+    "time_zone": "America/Chicago",
+    "roof_type": "fixed",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 0,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.neworleanssaints.com/stadium/",
+    "provider_ids": [
+      "espn:3493"
+    ]
+  },
+  {
+    "stadium_id": "metlife_stadium",
+    "official_name": "MetLife Stadium",
+    "city": "East Rutherford",
+    "state_or_region": "NJ",
+    "country_code": "US",
+    "latitude": 40.8135,
+    "longitude": -74.0745,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.giants.com/tickets/gamedayguide",
+    "provider_ids": [
+      "espn:3839"
+    ]
+  },
+  {
+    "stadium_id": "lincoln_financial_field",
+    "official_name": "Lincoln Financial Field",
+    "city": "Philadelphia",
+    "state_or_region": "PA",
+    "country_code": "US",
+    "latitude": 39.9008,
+    "longitude": -75.1675,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.philadelphiaeagles.com/stadium/",
+    "provider_ids": [
+      "espn:3806"
+    ]
+  },
+  {
+    "stadium_id": "acrisure_stadium",
+    "official_name": "Acrisure Stadium",
+    "city": "Pittsburgh",
+    "state_or_region": "PA",
+    "country_code": "US",
+    "latitude": 40.4468,
+    "longitude": -80.0158,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.steelers.com/stadium/",
+    "provider_ids": [
+      "espn:3752"
+    ]
+  },
+  {
+    "stadium_id": "levis_stadium",
+    "official_name": "Levi's Stadium",
+    "city": "Santa Clara",
+    "state_or_region": "CA",
+    "country_code": "US",
+    "latitude": 37.403,
+    "longitude": -121.97,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.49ers.com/stadium/",
+    "provider_ids": [
+      "espn:4738"
+    ]
+  },
+  {
+    "stadium_id": "lumen_field",
+    "official_name": "Lumen Field",
+    "city": "Seattle",
+    "state_or_region": "WA",
+    "country_code": "US",
+    "latitude": 47.5952,
+    "longitude": -122.3316,
+    "time_zone": "America/Los_Angeles",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.seahawks.com/game-day/",
+    "provider_ids": [
+      "espn:3673"
+    ]
+  },
+  {
+    "stadium_id": "raymond_james_stadium",
+    "official_name": "Raymond James Stadium",
+    "city": "Tampa",
+    "state_or_region": "FL",
+    "country_code": "US",
+    "latitude": 27.9759,
+    "longitude": -82.5033,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.buccaneers.com/stadium/",
+    "provider_ids": [
+      "espn:3886"
+    ]
+  },
+  {
+    "stadium_id": "nissan_stadium",
+    "official_name": "Nissan Stadium",
+    "city": "Nashville",
+    "state_or_region": "TN",
+    "country_code": "US",
+    "latitude": 36.1665,
+    "longitude": -86.7713,
+    "time_zone": "America/Chicago",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.tennesseetitans.com/stadium/",
+    "provider_ids": [
+      "espn:3810"
+    ]
+  },
+  {
+    "stadium_id": "northwest_stadium",
+    "official_name": "Northwest Stadium",
+    "city": "Landover",
+    "state_or_region": "MD",
+    "country_code": "US",
+    "latitude": 38.9078,
+    "longitude": -76.8645,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": null,
+    "verified_on": "2026-08-12",
+    "source_url": "https://www.commanders.com/stadium/",
+    "provider_ids": [
+      "espn:3719"
+    ]
+  },
+  {
+    "stadium_id": "tom_benson_hall_of_fame_stadium",
+    "official_name": "Tom Benson Hall of Fame Stadium",
+    "city": "Canton",
+    "state_or_region": "OH",
+    "country_code": "US",
+    "latitude": 40.8206,
+    "longitude": -81.3972,
+    "time_zone": "America/New_York",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-14",
+    "source_url": "https://www.nfl.com/schedules/2026/by-week/hall-of-fame-game"
+  },
+  {
+    "stadium_id": "melbourne_cricket_ground",
+    "official_name": "Melbourne Cricket Ground",
+    "city": "Melbourne",
+    "state_or_region": "VIC",
+    "country_code": "AU",
+    "latitude": -37.82,
+    "longitude": 144.9834,
+    "time_zone": "Australia/Melbourne",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:9119"
+    ]
+  },
+  {
+    "stadium_id": "maracana_stadium",
+    "official_name": "Maracanã Stadium",
+    "city": "Rio de Janeiro",
+    "state_or_region": "RJ",
+    "country_code": "BR",
+    "latitude": -22.9121,
+    "longitude": -43.2302,
+    "time_zone": "America/Sao_Paulo",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:11931"
+    ]
+  },
+  {
+    "stadium_id": "tottenham_hotspur_stadium",
+    "official_name": "Tottenham Hotspur Stadium",
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "latitude": 51.6043,
+    "longitude": -0.0664,
+    "time_zone": "Europe/London",
+    "roof_type": "open",
+    "surface_type": "artificial_turf",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:5534"
+    ]
+  },
+  {
+    "stadium_id": "wembley_stadium",
+    "official_name": "Wembley Stadium",
+    "city": "London",
+    "state_or_region": "England",
+    "country_code": "GB",
+    "latitude": 51.556,
+    "longitude": -0.2796,
+    "time_zone": "Europe/London",
+    "roof_type": "open",
+    "surface_type": "hybrid_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:2455"
+    ]
+  },
+  {
+    "stadium_id": "stade_de_france",
+    "official_name": "Stade de France",
+    "city": "Saint-Denis",
+    "state_or_region": "Île-de-France",
+    "country_code": "FR",
+    "latitude": 48.9245,
+    "longitude": 2.3602,
+    "time_zone": "Europe/Paris",
+    "roof_type": "open",
+    "surface_type": "hybrid_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:1781"
+    ]
+  },
+  {
+    "stadium_id": "bernabeu_stadium",
+    "official_name": "Bernabéu Stadium",
+    "city": "Madrid",
+    "state_or_region": "Community of Madrid",
+    "country_code": "ES",
+    "latitude": 40.4531,
+    "longitude": -3.6883,
+    "time_zone": "Europe/Madrid",
+    "roof_type": "retractable",
+    "surface_type": "hybrid_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:1353"
+    ]
+  },
+  {
+    "stadium_id": "fc_bayern_munich_arena",
+    "official_name": "FC Bayern Munich Arena",
+    "city": "Munich",
+    "state_or_region": "Bavaria",
+    "country_code": "DE",
+    "latitude": 48.2188,
+    "longitude": 11.6247,
+    "time_zone": "Europe/Berlin",
+    "roof_type": "open",
+    "surface_type": "hybrid_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:11930"
+    ]
+  },
+  {
+    "stadium_id": "estadio_banorte",
+    "official_name": "Estadio Banorte",
+    "city": "Mexico City",
+    "state_or_region": "CDMX",
+    "country_code": "MX",
+    "latitude": 19.3029,
+    "longitude": -99.1505,
+    "time_zone": "America/Mexico_City",
+    "roof_type": "open",
+    "surface_type": "natural_grass",
+    "weather_exposed": 1,
+    "valid_from_season": 2026,
+    "valid_through_season": 2026,
+    "verified_on": "2026-08-12",
+    "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/nfl-international-games",
+    "provider_ids": [
+      "espn:8219"
+    ]
+  }
+]

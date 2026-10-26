@@ -1,0 +1,71 @@
+name: Multi-Sport Forward Odds History
+
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+    inputs:
+      sports:
+        description: "Comma-separated sports to archive"
+        required: true
+        default: "nba,wnba,epl,mma,atp,wta"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: multisport-paper-database
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    env:
+      BOT_MODE: research
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      DATABASE_PATH: var/our_multisport_bot.sqlite3
+      ODDS_STALE_AFTER_MINUTES: ${{ vars.ODDS_STALE_AFTER_MINUTES || '60' }}
+      HTTP_TIMEOUT_SECONDS: ${{ vars.HTTP_TIMEOUT_SECONDS || '20' }}
+      HTTP_RETRY_ATTEMPTS: ${{ vars.HTTP_RETRY_ATTEMPTS || '3' }}
+      ODDS_API_MIN_REMAINING_CREDITS: ${{ vars.ODDS_API_MIN_REMAINING_CREDITS || '50' }}
+      MULTISPORT_ODDS_HORIZON_MINUTES: '360'
+      MULTISPORT_PARTICIPANT_REFRESH_HOURS: ${{ vars.MULTISPORT_PARTICIPANT_REFRESH_HOURS || '24' }}
+      ACCESSIBLE_BOOKMAKERS: ${{ vars.ACCESSIBLE_BOOKMAKERS }}
+      MARKET_CONSENSUS_BOOKMAKERS: ${{ vars.MARKET_CONSENSUS_BOOKMAKERS }}
+      THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+      - name: Restore latest canonical database
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p var restore
+          RUN_ID="$(gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=multisport-paper-database&per_page=100" --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')"
+          if [ -n "$RUN_ID" ]; then
+            gh run download "$RUN_ID" --name multisport-paper-database --dir restore
+            cp restore/our_multisport_bot.sqlite3 var/our_multisport_bot.sqlite3
+          else
+            python scripts/run_multisport_operations.py bootstrap
+          fi
+      - name: Archive fresh pregame odds only
+        env:
+          SPORTS: ${{ github.event_name == 'workflow_dispatch' && inputs.sports || 'nba,wnba,epl,mma,atp,wta' }}
+        run: python scripts/run_multisport_forward_archive.py --sports "$SPORTS"
+      - name: Checkpoint database
+        run: python -c "import sqlite3; d=sqlite3.connect('var/our_multisport_bot.sqlite3'); d.execute('PRAGMA wal_checkpoint(FULL)'); d.close()"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: multisport-paper-database
+          path: var/our_multisport_bot.sqlite3
+          if-no-files-found: error
+          retention-days: 90
+

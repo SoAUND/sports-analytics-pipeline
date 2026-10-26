@@ -1,0 +1,83 @@
+name: Approved Sports Autopilot
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/run_all_sports_autopilot.py
+      - src/sports_analytics_pipeline/data/seed.py
+      - src/sports_analytics_pipeline/data/stadiums.json
+      - .github/workflows/all-sports-autopilot.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: all-sports-autopilot
+  cancel-in-progress: false
+jobs:
+  autopilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      BOT_MODE: research
+      PRIMARY_BOOKMAKER_KEY: hardrockbet_fl
+      DATABASE_PATH: var/nfl_autopilot.sqlite3
+      THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ACCESSIBLE_BOOKMAKERS: ${{ vars.ACCESSIBLE_BOOKMAKERS }}
+      MARKET_CONSENSUS_BOOKMAKERS: ${{ vars.MARKET_CONSENSUS_BOOKMAKERS }}
+      ODDS_API_MIN_REMAINING_CREDITS: ${{ vars.ODDS_API_MIN_REMAINING_CREDITS || '50' }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install project
+        run: pip install .
+      - name: Restore durable NFL and coverage records
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p var restore
+          RUN_ID=$(gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts?name=nfl-autopilot-database&per_page=100" --jq '.artifacts | map(select(.expired == false)) | sort_by(.created_at) | reverse | .[0].workflow_run.id // empty')
+          if [ -n "$RUN_ID" ]; then
+            gh run download "$RUN_ID" --name nfl-autopilot-database --dir restore
+            cp restore/nfl_autopilot.sqlite3 var/nfl_autopilot.sqlite3
+          fi
+      - name: Collect broad public NFL research
+        run: python scripts/collect_public_research.py --sports nfl --database var/nfl_autopilot.sqlite3
+      - name: Evaluate NFL and monitor approved sports
+        run: python scripts/run_all_sports_autopilot.py
+      - name: Report result or failure to Telegram
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          if [ ! -f var/autopilot-message.txt ]; then
+            mkdir -p var
+            echo "autopilot failed before producing a report. Status: $JOB_STATUS. Coverage is unverified; inspect this run." > var/autopilot-message.txt
+          fi
+          if grep -q 'NO_GAMES_DUE' var/autopilot-message.txt; then
+            echo 'No games due. Telegram skipped.'
+            exit 0
+          fi
+          python scripts/send_telegram_notification.py --mode file --title 'Approved Sports Autopilot' --file var/autopilot-message.txt --run-url "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+      - name: Save durable database
+        if: always() && hashFiles('var/nfl_autopilot.sqlite3') != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: nfl-autopilot-database
+          path: var/nfl_autopilot.sqlite3
+          retention-days: 90
+      - name: Save complete evaluation and coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: all-sports-autopilot-report
+          path: |
+            var/autopilot-report.json
+            var/autopilot-message.txt
+            var/public-research
+          retention-days: 90
+
